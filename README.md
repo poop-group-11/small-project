@@ -2,6 +2,7 @@
 I WILL UPDATE THIS TERRIBLY DESIGNED README
 
 To run locally:
+
     clone repository to local folder
     (to install dependencies)
     in root folder: run 'npm i -g create-react-app'
