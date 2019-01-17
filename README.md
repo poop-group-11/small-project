@@ -17,4 +17,6 @@ To run locally:
     in client folder: run 'npm start'
     if you get an error and server doesn't start, try running 'npm i -g npm'
     then try starting it again
+    if it STILL doesn't work, try running 'npm install' (could take a while)
+    then try starting it again
     should open up in your browser automatically at localhost:3000
