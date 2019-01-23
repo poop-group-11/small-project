@@ -1,0 +1,155 @@
+body 
+{
+    /*background-image: url("ab2.jpg");*/
+    background-color: mintcream;
+    margin: 0px;
+}
+
+#title 
+{
+    position: fixed;
+    font-size: 30px;
+    width: 100%;
+    z-index: 250;
+    margin: 0px;
+    overflow: hidden;
+    text-align: left;
+    font-family: "Lucida Console", Monaco, monospace;
+    color: white;
+  	background-color: limegreen;
+    padding: 10px 10px 10px;
+}
+
+#copyright{
+    position: fixed;
+    font-size: 20px;
+    width: 100%;
+    bottom:0;
+    z-index: 250;
+    margin: 0px;
+    overflow: hidden;
+    text-align: center;
+    font-family: "Lucida Console", Monaco, monospace;
+    color: white;
+    background-color: yellowgreen;
+    opacity:90%;
+    padding: 10px 10px 10px;
+}
+
+#loginName{
+    font-size: 20px;
+    text-align: center;
+    width: 250px;
+    padding: 0% 0% 0%;
+}
+
+#loginPassword{
+    font-size: 20px;
+    text-align: center;
+    width: 250px;
+    padding: 0% 0% 0%;
+}
+
+.buttons
+{
+    font-size: 30px;
+    text-align: center;
+    border:none;
+    color: white;
+    background-color: green;
+    opacity: 2;
+    width: 250px;
+    margin-left: 0%;
+    font-family: 'Ubuntu', sans-serif;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+.buttons:hover {background-color: silver}
+
+.buttons:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.buttons2
+{
+    font-size: 20px;
+    text-align: center;
+    border:none;
+    color: white;
+    background-color: green;
+    opacity:0.9;
+    width: 250px;
+    margin-left: 0%;
+    font-family: 'Ubuntu', sans-serif;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+.buttons2:hover {background-color: silver}
+
+.buttons2:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+#inner-title{
+    font-family: "Lucida Console", Monaco, monospace;
+    font-size: 20px;
+    color:white;
+}
+
+#pic{
+    position: fixed;
+    border-radius: 0%;
+    top:15%;
+    left: 15%;
+    width: 35%;
+    opacity: 30%;
+}
+
+#logo{
+    position: fixed;
+    left: 995px;
+    top: 100px; 
+    z-index: 260;
+    width: 300px;
+    opacity:110%;
+}
+
+#logIn{
+
+    font-family: "Lucida Console", Monaco, monospace;
+    font-size: 35px;
+    width: 18%;
+    text-align: center;
+    color: white ;
+    position: fixed;
+    background: yellowgreen;   
+    border-radius: 50px;
+    opacity: .8;
+    left: 990px;
+    top: -50px; 
+    z-index: 200;
+    padding: 30% 2% 5% 2%;
+}
+
+#register{
+
+    font-family: "Lucida Console", Monaco, monospace;
+    font-size: 35px;
+    width: 18%;
+    text-align: center;
+    color: white ;
+    position: fixed;
+    background: yellowgreen;   
+    border-radius: 50px;
+    opacity: .8;
+    left: 990px;
+    top: -50px; 
+    z-index: 200;
+    padding: 30% 2% 5% 2%;
+} 
