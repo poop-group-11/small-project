@@ -105,18 +105,18 @@ body
 #pic{
     position: fixed;
     border-radius: 0%;
-    top:15%;
-    left: 15%;
-    width: 35%;
+    top:19%;
+    left: 20%;
+    width: 30%;
     opacity: 30%;
 }
 
 #logo{
     position: fixed;
-    left: 995px;
-    top: 100px; 
+    left: 68.2%;
+    top: 12%; 
     z-index: 260;
-    width: 300px;
+    width: 23%;
     opacity:110%;
 }
 
