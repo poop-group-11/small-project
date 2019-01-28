@@ -47,14 +47,16 @@ function doLogin(){
 
     var url; //Generate url for POST call.
 
-	//Create login cookie.
-	document.cookie = "user=" + user + ",pass=" + pass;
-
 	//Create login json.
 	var jsonSend = '{"login" : "' + user + '", "password" : "' + pass + '"}';
 
 	//POST request
 	//TODO
+	
+	//Take JWT token from jsonRecieve and store in cookie.
+	var parsedJson = JSON.parse(jsonRecieve);
+	document.cookie = "token=" + parsedJson[2].id;
+	
 
 }
 
@@ -66,7 +68,21 @@ function signUpPrompt(){
 function signUp(){
 	hideOrShow("register", false);
 	hideOrShow("logIn", true);
+	
+	var username = document.getElementById("loginName").value; //WARNING id may change in future updates to html.
+	var password = document.getElementById("loginPassword").value; //WARNING id may change in future updates to html.
+	
+	var url; //Generate url for POST call.
+	
+	//Generate createUser json.
+	var jsonSend = '{"login" : "' + username +
+	             '", "password" : "' + password + '"}';
+	
 	//POST request
+	
+	//Take JWT token from jsonRecieve and store in cookie.
+	var parsedJson = JSON.parse(jsonRecieve);
+	document.cookie = "token=" + parsedJson[2].id;
 }
 
 function getContacts(){
@@ -77,6 +93,22 @@ function createContactPrompt(){
 }
 
 function createContact(){
+	
+	var fname;
+	var lname;
+	var email;
+	var phone;
+	var address;
+	
+	var url;
+	
+	//Generate createContanct json.
+	var jsonSend = '{"fname" : "' + fname +
+	             '", "lname" : "' + lname +
+	             '", "email" : "' + email +
+	             '", "phone" : "' + phone +
+	             '", "address" : "' + address + '"}';
+	
 	//POST request
 }
 
@@ -110,10 +142,10 @@ function hideOrShow( elementId, showState ){
 	document.getElementById( elementId ).style.display = dis;
 }
 
-function get(url, request){
+function get(url){
 	var xhr = new XMLHttpRequest();
 	xhr.open("GET", url, true);
-	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8"); //TODO: figure out what is supposed to go here.
+	xhr.setRequestHeader("Content-type", "Authorization: Bearer " + document.cookie"); //TODO: figure out what is supposed to go here.
 	try{
 		xhr.onreadystatechange = function(){
 			if(this.readyState == 4 && this.status == 200){
@@ -129,10 +161,10 @@ function get(url, request){
   return jsonRecieve;
 }
 
-function post(jsonSend, url, request){
+function post(jsonSend, url){
 	var xhr = new XMLHttpRequest();
 	xhr.open("POST", url, true);
-	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8"); //TODO: figure out what is supposed to go here.
+	xhr.setRequestHeader("Content-type", "Authorization: Bearer " + document.cookie); //TODO: figure out what is supposed to go here.
 	try{
 		xhr.onreadystatechange = function(){
 			if(this.readystate = 4 && this.status == 200){
@@ -148,10 +180,10 @@ function post(jsonSend, url, request){
 	return jsonRecieve;
 }
 
-function delete(jsonSend, url, request){
+function delete(jsonSend, url){
 	var xhr = new XMLHttpRequest();
 	xhr.open("DELETE", url, true);
-	xhr.setRequstHeader("Content-Type", "application/json; charset=UTF-8");
+	xhr.setRequestHeader("Content-Type", "Authorization: Bearer " + document.cookie);
 	try{
 		xhr.onreadystatechange = function(){
 			if(this.readystate = 4 && this.status == 200){
