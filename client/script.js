@@ -42,8 +42,8 @@ function doLogin(){
 	hideOrShow("logIn", false);
 	hideOrShow("register", false);
 
-    var user = document.getElementById("loginName"); //Assign from user field.
-    var pass = document.getElementByPass("loginName"); //Assign from pass field.
+    var user = document.getElementById("loginName").value; //Assign from user field.
+    var pass = document.getElementById("loginPassword").value; //Assign from pass field.
 
     var url; //Generate url for POST call.
 
@@ -51,7 +51,7 @@ function doLogin(){
 	document.cookie = "user=" + user + ",pass=" + pass;
 
 	//Create login json.
-	var jsonSend = '{"username":"' + login '", "password":"' + password + '"}';
+	var jsonSend = '{"login" : "' + user + '", "password" : "' + pass + '"}';
 
 	//POST request
 	//TODO
