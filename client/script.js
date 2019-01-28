@@ -42,29 +42,37 @@ function doLogin(){
 	hideOrShow("logIn", false);
 	hideOrShow("register", false);
 
-    var user = document.getElementById("loginName").value; //Assign from user field.
-    var pass = document.getElementById("loginPassword").value; //Assign from pass field.
+  var username = document.getElementById("loginName").value; //Assign from user field.
+  var password = document.getElementById("loginPassword").value; //Assign from pass field.
 
-    var url; //Generate url for POST call.
-
-	//Create login json.
-	var jsonSend = '{"login" : "' + user + '", "password" : "' + pass + '"}';
-
-	//POST request
-	//TODO
-	
+	//Create JSON body.
+	let body = {
+		username: username,
+		password: password
+	}
+	//Create parameters for fetch.
+	let fetchData = {
+		method: "POST",
+		body: body,
+		headers: { "Content-Type": "application/json" }
+	}
+	//Fetch the data.
+  fetch(urlBase + "api/doLogin", fetchData)
+	.then(function(response) {
+		//TODO
+		console.log(reponses.json());
+	}).catch(function(error) {
+		console.log("There has been a problem with your fetch operation: ", error.message);
+	});
 	//Take JWT token from jsonRecieve and store in cookie.
 	//var parsedJson = JSON.parse(jsonRecieve);
 	//document.cookie = "token=" + parsedJson[2].id;
-	
-
 }
 
 function doTester(){
 	hideOrShow("register", false);
 	hideOrShow("logIn", false);
 	hideOrShow("wrapper", true);
-
 }
 
 function signUpPrompt(){
@@ -75,18 +83,30 @@ function signUpPrompt(){
 function signUp(){
 	hideOrShow("register", false);
 	hideOrShow("logIn", true);
-	
+
 	var username = document.getElementById("loginName").value; //WARNING id may change in future updates to html.
 	var password = document.getElementById("loginPassword").value; //WARNING id may change in future updates to html.
-	
-	var url; //Generate url for POST call.
-	
-	//Generate createUser json.
-	var jsonSend = '{"login" : "' + username +
-	             '", "password" : "' + password + '"}';
-	/*
-	//POST request
-<<<<<<< HEAD
+
+	//Create JSON Body.
+	let body = {
+		username: username,
+		password: password
+	}
+  //Create parameters for fetch.
+	let fetchData = {
+		method: "POST",
+		body: body,
+		headers: { "Content-Type": "application/json" }
+	}
+  //Fetch the data.
+  fetch(urlBase + "api/createUser", fetchData)
+	.then(function(response) {
+		console.log(reponses.json());
+	}).catch(function(error) {
+		console.log("There has been a problem with your fetch operation: ", error.message);
+	});
+
+/*
 	let username.getElementById("loginName");
 	let password = document.getElementById("loginPassword");
 
@@ -100,18 +120,17 @@ function signUp(){
 
 	fetch(urlBase + "api/createUser", {
 		method: method,
-		body: body, 
+		body: body,
 		headers: headers
 	}).then(res => {
 		console.log(res.json());
 	});
+*/
 
-=======
-	
+
 	//Take JWT token from jsonRecieve and store in cookie.
 	//var parsedJson = JSON.parse(jsonRecieve);
 	//document.cookie = "token=" + parsedJson[2].id;
->>>>>>> 5a53b44be68735ab09cd47f6bddf1a2283e24dc2*/
 }
 
 function getContacts(){
@@ -122,23 +141,35 @@ function createContactPrompt(){
 }
 
 function createContact(){
-	
+
 	var fname;
 	var lname;
 	var email;
 	var phone;
 	var address;
-	
-	var url;
-	
-	//Generate createContanct json.
-	//var jsonSend = '{"fname" : "' + fname +
-	//             '", "lname" : "' + lname +
-	//             '", "email" : "' + email +
-	//             '", "phone" : "' + phone +
-	//             '", "address" : "' + address + '"}';
-	
-	//POST request
+
+	//Generate createContact json.
+	let body = {
+		fname : fname,
+		lname : lname,
+		email : email,
+		phone : phone,
+		address : address
+	}
+	//Create parameters for fetch.
+	let fetchData = {
+		method: "POST",
+		body: body,
+		headers: { "Content-Type" : "application/json",
+	             "Authorization" : "Bearer " + document.cookie }
+	}
+  //Fetch the Data
+	fetch(urlBase + "api/createContact", fetchData)
+	.then(function(response) {
+		console.log(reponses.json());
+	}).catch(function(error) {
+		console.log("There has been a problem with your fetch operation: ", error.message);
+	});
 
 }
 
@@ -171,6 +202,7 @@ function hideOrShow( elementId, showState ){
 	document.getElementById( elementId ).style.visibility = vis;
 	document.getElementById( elementId ).style.display = dis;
 }
+
 /*
 function get(url){
 	var xhr = new XMLHttpRequest();
@@ -227,4 +259,4 @@ function delete(jsonSend, url){
 		//TODO: process err.message
 	}
 	return jsonRecieve;
-}*/ 
+}*/
