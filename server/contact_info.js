@@ -13,7 +13,7 @@ const NumberSchema = new Schema(
 const ContactSchema = new Schema(
   {
     id: Number,
-    user: String,
+    user: Number,
     fname: String,
     lname: String,
     email: String,
