@@ -60,6 +60,12 @@ function doLogin(){
 
 }
 
+function doTester(){
+	hideOrShow("register", false);
+	hideOrShow("logIn", false);
+	
+}
+
 function signUpPrompt(){
 	hideOrShow("register", true);
 	hideOrShow("logIn", false);
