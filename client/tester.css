@@ -54,6 +54,7 @@ body
     /*background-image: url("ab2.jpg");*/
     background-color: mintcream;
     margin: 0px;
+    overflow-y: scroll;
 }
 
 #title 
@@ -90,26 +91,26 @@ body
 #loginName{
     font-size: 20px;
     text-align: center;
-    width: 250px;
+    width: 95%;
     padding: 0% 0% 0%;
 }
 
 #loginPassword{
     font-size: 20px;
     text-align: center;
-    width: 250px;
+    width: 95%;
     padding: 0% 0% 0%;
 }
 
 .buttons
 {
-    font-size: 30px;
+    font-size: 24px;
     text-align: center;
     border:none;
     color: white;
     background-color: green;
     opacity: 2;
-    width: 250px;
+    width: 95%;
     margin-left: 0%;
     font-family: 'Ubuntu', sans-serif;
     -webkit-transition-duration: 0.4s; /* Safari */
@@ -132,7 +133,7 @@ body
     color: white;
     background-color: green;
     opacity:0.9;
-    width: 250px;
+    width: 95%;
     margin-left: 0%;
     font-family: 'Ubuntu', sans-serif;
     -webkit-transition-duration: 0.4s; /* Safari */
@@ -182,10 +183,11 @@ body
     background: yellowgreen;   
     border-radius: 50px;
     opacity: .8;
-    left: 990px;
-    top: -50px; 
+    left: 68.55%;
+    top: 0%; 
     z-index: 200;
     padding: 30% 2% 5% 2%;
+    overflow-y: scroll;
 }
 
 #register{
@@ -199,8 +201,8 @@ body
     background: yellowgreen;   
     border-radius: 50px;
     opacity: .8;
-    left: 990px;
-    top: -50px; 
+    left: 68.55%;
+    top: 0%; 
     z-index: 200;
     padding: 30% 2% 5% 2%;
 } 
