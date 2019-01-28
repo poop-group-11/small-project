@@ -35,9 +35,27 @@
 		  Called upon clicking a contact. Displays contact info to user.
 */
 
+var urlBase;
+var extension;
+
 function doLogin(){
 	hideOrShow("logIn", false);
 	hideOrShow("register", false);
+
+    var user = document.getElementById("loginName"); //Assign from user field.
+    var pass = document.getElementByPass("loginName"); //Assign from pass field.
+
+    var url; //Generate url for POST call.
+
+	//Create login cookie.
+	document.cookie = "user=" + user + ",pass=" + pass;
+
+	//Create login json.
+	var jsonSend = '{"username":"' + login '", "password":"' + password + '"}';
+
+	//POST request
+	//TODO
+
 }
 
 function signUpPrompt(){
@@ -48,27 +66,32 @@ function signUpPrompt(){
 function signUp(){
 	hideOrShow("register", false);
 	hideOrShow("logIn", true);
+	//POST request
 }
 
-function pullContacts(){
+function getContacts(){
+	//Get request
 }
 
 function createContactPrompt(){
 }
 
 function createContact(){
+	//POST request
 }
 
 function updateContactPrompt(){
 }
 
 function updateContact(){
+	//POST request
 }
 
 function deleteContactPrompt(){
 }
 
 function deleteContact(){
+	// Delete request
 }
 
 function viewContact(){
