@@ -63,7 +63,8 @@ function doLogin(){
 function doTester(){
 	hideOrShow("register", false);
 	hideOrShow("logIn", false);
-	
+	hideOrShow("wrapper", true);
+
 }
 
 function signUpPrompt(){
@@ -83,7 +84,7 @@ function signUp(){
 	//Generate createUser json.
 	var jsonSend = '{"login" : "' + username +
 	             '", "password" : "' + password + '"}';
-	
+	/*
 	//POST request
 <<<<<<< HEAD
 	let username.getElementById("loginName");
@@ -110,7 +111,7 @@ function signUp(){
 	//Take JWT token from jsonRecieve and store in cookie.
 	//var parsedJson = JSON.parse(jsonRecieve);
 	//document.cookie = "token=" + parsedJson[2].id;
->>>>>>> 5a53b44be68735ab09cd47f6bddf1a2283e24dc2
+>>>>>>> 5a53b44be68735ab09cd47f6bddf1a2283e24dc2*/
 }
 
 function getContacts(){
@@ -226,4 +227,4 @@ function delete(jsonSend, url){
 		//TODO: process err.message
 	}
 	return jsonRecieve;
-}*/
+}*/ 

@@ -206,7 +206,6 @@ body
 } 
 
 .scrollbar{
-	visibility: hidden;
     display: inline-block;
     background: yellowgreen; 
     width: 15%;
@@ -221,7 +220,6 @@ body
 	text-align: center;
 }
 .content{
-	visibility: hidden;
     display: inline-block;
     background: blue;
     width: 85%;
@@ -285,7 +283,7 @@ body
 	color: white;
 }
 
-.wrapper{
+#wrapper{
     width: 100%;
     display: block;
 	margin: 0px;
