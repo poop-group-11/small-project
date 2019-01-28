@@ -35,7 +35,7 @@
 		  Called upon clicking a contact. Displays contact info to user.
 */
 
-var urlBase;
+const urlBase = "https://localhost:3001/";
 var extension;
 
 function doLogin(){
@@ -67,6 +67,25 @@ function signUp(){
 	hideOrShow("register", false);
 	hideOrShow("logIn", true);
 	//POST request
+	let username.getElementById("loginName");
+	let password = document.getElementById("loginPassword");
+
+	let body = {
+		username: username,
+		password: password
+	}
+
+	let method = "POST";
+	headers = { 'Content-type: application/json' };
+
+	fetch(urlBase + "api/createUser", {
+		method: method,
+		body: body, 
+		headers: headers
+	}).then(res => {
+		console.log(res.json());
+	});
+
 }
 
 function getContacts(){
@@ -78,6 +97,7 @@ function createContactPrompt(){
 
 function createContact(){
 	//POST request
+
 }
 
 function updateContactPrompt(){
