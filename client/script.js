@@ -74,8 +74,7 @@ function deleteContact(){
 function viewContact(){
 }
 
-function hideOrShow( elementId, showState )
-{
+function hideOrShow( elementId, showState ){
 	var vis = "visible";
 	var dis = "block";
 	if( !showState )
@@ -86,4 +85,61 @@ function hideOrShow( elementId, showState )
 
 	document.getElementById( elementId ).style.visibility = vis;
 	document.getElementById( elementId ).style.display = dis;
+}
+
+function get(url, request){
+	var xhr = new XMLHttpRequest();
+	xhr.open("GET", url, true);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8"); //TODO: figure out what is supposed to go here.
+	try{
+		xhr.onreadystatechange = function(){
+			if(this.readyState == 4 && this.status == 200){
+				var jsonRecieve = JSON.parse( xhr.responseText );
+			}
+		};
+		xhr.send();
+	}
+	catch(err)
+	{
+		//TODO: Process err.message
+	}
+  return jsonRecieve;
+}
+
+function post(jsonSend, url, request){
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8"); //TODO: figure out what is supposed to go here.
+	try{
+		xhr.onreadystatechange = function(){
+			if(this.readystate = 4 && this.status == 200){
+				var jsonRecieve = JSON.parse(  xhr.responsetext );
+			}
+		};
+		xhr.send(jsonSend);
+	}
+	catch(err)
+	{
+		//TODO: process err.message
+	}
+	return jsonRecieve;
+}
+
+function delete(jsonSend, url, request){
+	var xhr = new XMLHttpRequest();
+	xhr.open("DELETE", url, true);
+	xhr.setRequstHeader("Content-Type", "application/json; charset=UTF-8");
+	try{
+		xhr.onreadystatechange = function(){
+			if(this.readystate = 4 && this.status == 200){
+				var jsonRecieve = JSON.parse(  xhr.responsetext );
+			}
+		};
+		xhr.send();
+	}
+	catch(err)
+	{
+		//TODO: process err.message
+	}
+	return jsonRecieve;
 }
