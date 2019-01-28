@@ -54,7 +54,6 @@ body
     /*background-image: url("ab2.jpg");*/
     background-color: mintcream;
     margin: 0px;
-    overflow-y: scroll;
 }
 
 #title 
@@ -73,10 +72,10 @@ body
 }
 
 #copyright{
-    position: fixed;
+    position: absolute;
     font-size: 20px;
     width: 100%;
-    bottom:0;
+    bottom:0%;
     z-index: 250;
     margin: 0px;
     overflow: hidden;
@@ -164,12 +163,10 @@ body
 }
 
 #logo{
-    position: fixed;
-    left: 68.2%;
-    top: 12%; 
     z-index: 260;
-    width: 23%;
+    width: 100%;
     opacity:110%;
+    position: relative;
 }
 
 #logIn{
@@ -179,15 +176,15 @@ body
     width: 18%;
     text-align: center;
     color: white ;
-    position: fixed;
+    position: absolute;
     background: yellowgreen;   
     border-radius: 50px;
     opacity: .8;
     left: 68.55%;
     top: 0%; 
     z-index: 200;
-    padding: 30% 2% 5% 2%;
-    overflow-y: scroll;
+    padding: 5% 2% 5% 2%;
+    overflow-y: auto;
 }
 
 #register{
@@ -197,14 +194,15 @@ body
     width: 18%;
     text-align: center;
     color: white ;
-    position: fixed;
+    position: absolute;
     background: yellowgreen;   
     border-radius: 50px;
     opacity: .8;
     left: 68.55%;
     top: 0%; 
     z-index: 200;
-    padding: 30% 2% 5% 2%;
+    padding: 5% 2% 5% 2%;
+    overflow-y: scroll;
 } 
 
 .scrollbar{
