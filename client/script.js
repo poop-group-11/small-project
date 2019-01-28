@@ -145,7 +145,7 @@ function hideOrShow( elementId, showState ){
 function get(url){
 	var xhr = new XMLHttpRequest();
 	xhr.open("GET", url, true);
-	xhr.setRequestHeader("Content-type", "Authorization: Bearer " + document.cookie"); //TODO: figure out what is supposed to go here.
+	xhr.setRequestHeader("Content-type", "Authorization: Bearer " + document.cookie); //TODO: figure out what is supposed to go here.
 	try{
 		xhr.onreadystatechange = function(){
 			if(this.readyState == 4 && this.status == 200){
