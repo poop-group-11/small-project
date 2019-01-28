@@ -35,7 +35,7 @@
 		  Called upon clicking a contact. Displays contact info to user.
 */
 
-var urlBase;
+const urlBase = "https://localhost:3001/";
 var extension;
 
 function doLogin(){
@@ -79,10 +79,32 @@ function signUp(){
 	             '", "password" : "' + password + '"}';
 	
 	//POST request
+<<<<<<< HEAD
+	let username.getElementById("loginName");
+	let password = document.getElementById("loginPassword");
+
+	let body = {
+		username: username,
+		password: password
+	}
+
+	let method = "POST";
+	headers = { 'Content-type: application/json' };
+
+	fetch(urlBase + "api/createUser", {
+		method: method,
+		body: body, 
+		headers: headers
+	}).then(res => {
+		console.log(res.json());
+	});
+
+=======
 	
 	//Take JWT token from jsonRecieve and store in cookie.
 	//var parsedJson = JSON.parse(jsonRecieve);
 	//document.cookie = "token=" + parsedJson[2].id;
+>>>>>>> 5a53b44be68735ab09cd47f6bddf1a2283e24dc2
 }
 
 function getContacts(){
@@ -110,6 +132,7 @@ function createContact(){
 	//             '", "address" : "' + address + '"}';
 	
 	//POST request
+
 }
 
 function updateContactPrompt(){
