@@ -54,8 +54,8 @@ function doLogin(){
 	//TODO
 	
 	//Take JWT token from jsonRecieve and store in cookie.
-	var parsedJson = JSON.parse(jsonRecieve);
-	document.cookie = "token=" + parsedJson[2].id;
+	//var parsedJson = JSON.parse(jsonRecieve);
+	//document.cookie = "token=" + parsedJson[2].id;
 	
 
 }
@@ -81,8 +81,8 @@ function signUp(){
 	//POST request
 	
 	//Take JWT token from jsonRecieve and store in cookie.
-	var parsedJson = JSON.parse(jsonRecieve);
-	document.cookie = "token=" + parsedJson[2].id;
+	//var parsedJson = JSON.parse(jsonRecieve);
+	//document.cookie = "token=" + parsedJson[2].id;
 }
 
 function getContacts(){
@@ -103,11 +103,11 @@ function createContact(){
 	var url;
 	
 	//Generate createContanct json.
-	var jsonSend = '{"fname" : "' + fname +
-	             '", "lname" : "' + lname +
-	             '", "email" : "' + email +
-	             '", "phone" : "' + phone +
-	             '", "address" : "' + address + '"}';
+	//var jsonSend = '{"fname" : "' + fname +
+	//             '", "lname" : "' + lname +
+	//             '", "email" : "' + email +
+	//             '", "phone" : "' + phone +
+	//             '", "address" : "' + address + '"}';
 	
 	//POST request
 }
@@ -141,7 +141,7 @@ function hideOrShow( elementId, showState ){
 	document.getElementById( elementId ).style.visibility = vis;
 	document.getElementById( elementId ).style.display = dis;
 }
-
+/*
 function get(url){
 	var xhr = new XMLHttpRequest();
 	xhr.open("GET", url, true);
@@ -197,4 +197,4 @@ function delete(jsonSend, url){
 		//TODO: process err.message
 	}
 	return jsonRecieve;
-}
+}*/
