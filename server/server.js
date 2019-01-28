@@ -1,19 +1,24 @@
-
 const mongoose = require("mongoose");
 const express = require("express");
 const bodyParser = require("body-parser");
 const logger = require("morgan");
 const Data = require("./data");
+const User = require("./user_account");
+const Contact = require("./contact_info");
+require('dotenv').config();
+let middleware = require('./middleware');
 
 const API_PORT = 3001;
 const app = express();
 const router = express.Router();
 
+let dbRoute;
+
 // this is our MongoDB database
 if(process.env.PROD) { //This will return true when run on our server
-    const dbRoute = "mongodb://localhost:27017/contacts"; //This is our locally hosted DB.
+    dbRoute = "mongodb://localhost:27017/contacts"; //This is our locally hosted DB.
 } else {
-    const dbRoute = "mongodb://poopgroup11:poopgroup11@ds257564.mlab.com:57564/contacts";
+    dbRoute = "mongodb://poopgroup11:poopgroup11@ds257564.mlab.com:57564/contacts";
 }
 
 // connects our back end code with the database
@@ -35,55 +40,121 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(logger("dev"));
 
-// this is our get method
-// this method fetches all available data in our database
-router.get("/getData", (req, res) => {
-  Data.find((err, data) => {
-    if (err) return res.json({ success: false, error: err });
-    return res.json({ success: true, data: data });
-  });
-});
+let loginHandler =  (req, res) => {
+  const { username, password } = req.body;
+  // For the given username fetch user from DB
+  // let mockedUsername = 'admin';
+  // let mockedPassword = 'password';
 
-// this is our update method
-// this method overwrites existing data in our database
-router.post("/updateData", (req, res) => {
-  const { id, update } = req.body;
-  Data.findOneAndUpdate(id, update, err => {
-    if (err) return res.json({ success: false, error: err });
-    return res.json({ success: true });
-  });
-});
 
-// this is our delete method
-// this method removes existing data in our database
-router.delete("/deleteData", (req, res) => {
-  const { id } = req.body;
-  Data.findOneAndDelete(id, err => {
-    if (err) return res.send(err);
-    return res.json({ success: true });
-  });
-});
+  if (username && password) {
+    User.find({username: username, pass: password}, (err, data) => {
+      if(err){
+        res.send(403).json({
+          success: false,
+          message: 'Incorrect username or password'
+        });
+      }
+      else {
+        let token = jwt.sign(
+          {username: data.username, id: data.id},
+          config.secret,
+          { expiresIn: '24h'} // expires in 24 hours
+        );
+        // return the JWT token for the future API calls
+        res.json({
+          success: true,
+          message: 'Authentication successful!',
+          token: token
+        });
+      }
+    });
+  } else {
+    res.send(400).json({
+      success: false,
+      message: 'Authentication failed! Please check the request'
+    });
+  }
+}
 
-// this is our create methid
-// this method adds new data in our database
-router.post("/putData", (req, res) => {
-  let data = new Data();
 
-  const { id, message } = req.body;
+//Create user in database when client wants to register a new account
+router.post("/createUser", (req, res) => {
+  let user = new User();
 
-  if ((!id && id !== 0) || !message) {
+  const{ username, password } = req.body;
+
+  //prevent creation of account if something is wrong
+  //TODO: add more issues
+  if(!username || !password) {
     return res.json({
       success: false,
       error: "INVALID INPUTS"
     });
   }
-  data.message = message;
-  data.id = id;
-  data.save(err => {
+  //otherwise post data
+  user.username = username;
+  user.password = password;
+  user.save(err => {
+    if (err) return res.json({ success: false, error: err });
+    return res.json({ success:true });
+  });
+});
+
+router.post("/login", loginHandler);
+
+//create a new contact for specific user
+router.post("/createContact", middleware.checkToken, (req, res) => {
+  let contact = new Contact();
+
+  const{ fname, lname, email, phone, address } = req.body;
+  if(!fname || !lname || !email || !phone || !address){
+    return res.json({
+      success: false,
+      error: "INVALID INPUTS"
+    });
+  }
+
+  contact.user = req.decoded.id;
+  contact.fname = fname;
+  contact.lname = lname;
+  contact.email = email;
+  contact.numbers = phone;
+  contact.address = address;
+
+  contact.save(err => {
     if (err) return res.json({ success: false, error: err });
     return res.json({ success: true });
   });
+
 });
+
+//TODO: updatecontact
+router.post("/updateContact", middleware.checkToken, (req, res) => {
+  const { id, update } = req.body;
+  Contacts.findOneAndUpdate({ id:id, user:req.decoded.id }, update, err => {
+    if(err) return res.json({ success: false, error: err });
+    return res.json({ success: true });
+  });
+});
+
+router.delete("/deleteContact", middleware.checkToken, (req, res) => {
+  const { id } = req.body;
+  Contact.findOneAndDelete({id:id, user:req.decoded.id }, err => {
+    if (err) return res.send(err);
+    return res.json({ success: true });
+  });
+});
+
+
+//TODO: figure out how to use .find() for particular ID
+router.get("/getContacts", middleware.checkToken, (req, res) => {
+  Contacts.find({ user: req.decoded.id }, (err, data) => {
+    if (err) return res.json({ success: false, error: err });
+    return res.json({ success: true, data: data });
+  });
+});
+
 
 // append /api for our http requests
 app.use("/api", router);
