@@ -70,9 +70,8 @@ function doLogin(){
 }
 
 function doTester(){
-	hideOrShow("register", false);
-	hideOrShow("logIn", false);
-	hideOrShow("wrapper", true);
+	hideOrShow("Front Page", false);
+	hideOrShow("contactPage", true);
 }
 
 function signUpPrompt(){
