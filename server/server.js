@@ -92,12 +92,33 @@ router.post("/createUser", (req, res) => {
       error: "INVALID INPUTS"
     });
   }
-  //otherwise post data
-  user.username = username;
-  user.password = password;
-  user.save(err => {
-    if (err) return res.json({ success: false, error: err });
-    return res.json({ success:true });
+
+  console.log(username);
+
+  User.find({ username:username }, (error, data) => {
+    if(error){
+      console.log("error: " + error);
+      return res.json({
+        success: false,
+        error: error
+      });
+    }else if(data.length == 0){
+      console.log(data);
+      console.log("Saving User: " + username);
+      //otherwise post data
+      user.username = username;
+      user.pass = password;
+      user.save(err => {
+        if (err) return res.json({ success: false, error: err });
+        return res.json({ success:true });
+      });
+    }else{
+      console.log(data);
+      return res.json({
+        success: false,
+        message: 'Username already exists'
+      });
+    }
   });
 });
 
