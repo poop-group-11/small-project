@@ -35,7 +35,8 @@
 		  Called upon clicking a contact. Displays contact info to user.
 */
 
-const urlBase = "https://localhost:3001/";
+//const urlBase = "https://localhost:3001/";
+const urlBase = "/"; //For use on the production server (plz make sure this is uncommented when you push)
 var extension;
 
 function doLogin(){
