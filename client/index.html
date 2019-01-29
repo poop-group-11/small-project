@@ -32,13 +32,13 @@
 </div>
 	
 <div id="contactPage">
-	<h3><div id="contactHeader">Contact Page</div>
-	<button type="button" id="addContact" onclick="addContact();">Make A New Friend?</button>
-	</h3>
+	<h5><div id="contactHeader">Contact Page</div>
+	<button type="button" id="addContact" onclick="addContactPrompt();">Make A New Friend?</button>
+	</h5>
 	<div id="info">
 		<div class="scrollbar">
 			<div id="head">Contact List</div>
-			<button type="button" class="contactHead" onclick ="getInfo();">Test</button>
+			<button type="button" class="contactHead" onclick ="testerTwo();">Test</button>
 		</div>
 		<div class="content" id="ContactID">
 			<div id="name">A Test Name</div>
@@ -46,6 +46,13 @@
 			<div id="phone">A Test Number</div>
 			<div id="address">A Rather Large Test Address To See How This Field Works</div>
 			<button type="button" class="deleteContact" onclick ="deleteContact();">Remove Friend Forever?</button>
+		</div>
+		<div class="fields" id="NewFriends">
+			<input type="text" id="newName" placeholder="Their Name?" /><br />
+			<input type="text" id="newEmail" placeholder="Their Email?" /><br />
+			<input type="text" id="newPhone" placeholder="Their Phone Number?" /><br />
+			<input type="text" id="newAddress" placeholder="Their Address?" /><br />
+			<button type="button" class="deleteContact" onclick ="addContact();">Make A New Friend Forever.</button>
 		</div>
 	</div>
 </div>

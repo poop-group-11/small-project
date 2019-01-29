@@ -70,6 +70,19 @@ function doLogin(){
 	//document.cookie = "token=" + parsedJson[2].id;
 }
 
+function pradBullshit(elementId, showState){
+	var vis = "visible";
+	var dis = "inline-block";
+	if( !showState )
+	{
+		vis = "hidden";
+		dis = "none";
+	}
+
+	document.getElementById( elementId ).style.visibility = vis;
+	document.getElementById( elementId ).style.display = dis;
+}
+
 function doTester(){
 	hideOrShow("Front Page", false);
 	hideOrShow("contactPage", true);
@@ -78,6 +91,16 @@ function doTester(){
 function signUpPrompt(){
 	hideOrShow("register", true);
 	hideOrShow("logIn", false);
+}
+
+function addContactPrompt(){
+	pradBullshit("ContactID", false);
+	pradBullshit("NewFriends", true);
+}
+
+function testerTwo(){
+	pradBullshit("ContactID", true);
+	pradBullshit("NewFriends", false);
 }
 
 function signUp(){
@@ -135,6 +158,7 @@ function signUp(){
 
 function getContacts(){
 	//Get request
+	
 }
 
 function createContactPrompt(){
