@@ -2,47 +2,52 @@
 <html>
 <head>
 <title>Contact Manager</title>
-<script type="text/javascript" src="changer.js"></script>
+<script type="text/javascript" src="script.js"></script>
 	<link href="tester.css" rel="stylesheet">	
     <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 </head>
 <body>
-<h3 id="title">P.O.O.P Contact Manager</h3>
 
-<img src="images/green.png" id = "pic" >
-
-<h4 id="copyright" >&copy; Copyright</h4>
-
-<div id="logIn">
-	<img id="logo" src="images/ab2 copy.png">
-	<span id="inner-title">PLEASE LOG IN</span><br />
-	<input type="text" id="loginName" placeholder="Username" /><br />
-	<input type="password" id="loginPassword" placeholder="Password"/><br />
-	<button type="button" id="loginButton" class="buttons" onclick="doLogin();"> Login </button>
-	<button type="button" id="signInButton" class="buttons2" onclick="signUp();"> New Users </button>	
-
-</div>
-
-<div id="register" style="display:none; visibility: hidden;"> 
-	<img id="logo" src="images/ab2 copy.png">
-	<span id="inner-title">Please input the following</span><br />
-	<input type="text" id="loginName" placeholder="Username" /><br />
-	<input type="password" id="loginPassword" placeholder="Password"/><br />
-	<button type="button" id="loginButton" class="buttons" onclick="signedUp();"> Sign Up </button>
-</div>
-
-<div class="wrapper">
-	<div class="scrollbar">
-		<div id="head">Contact List</div>
-		<button type="button" class="contactHead" onclick ="getInfo();">Contact 1</button>
+<div id="Front Page">
+	<h3>P.O.O.P Contact Manager</h3>
+	<img src="images/green.png" id = "pic" >
+	<div id="logIn">
+		<img id="logo" src="images/ab2 copy.png">
+		<span id="inner-title">PLEASE LOG IN</span><br />
+		<input type="text" id="loginName" placeholder="Username" /><br />
+		<input type="password" id="loginPassword" placeholder="Password"/><br />
+		<button type="button" id="loginButton" class="buttons" onclick="doLogin();"> Login </button>
+		<button type="button" id="signInButton" class="buttons2" onclick="signUp();"> New Users </button>	
+		<button type="button" id="Tester" class="buttons" onclick="doTester();"> Tester </button>
 	</div>
-	<div class="content">
-		<div id="name">H</div>
-		<div id="email">H</div>
-		<div id="phone">H</div>
-		<div id="address">H</div>
-		<button type="button" id="deleteContact" onclick ="deleteContact();">Remove Friend Forever?</button>
-	</div> 
+
+	<div id="register"> 
+		<img id="logo" src="images/ab2 copy.png">
+		<span id="inner-title">Please input the following</span><br />
+		<input type="text" id="loginName" placeholder="Username" /><br />
+		<input type="password" id="loginPassword" placeholder="Password"/><br />
+		<button type="button" id="loginButton" class="buttons" onclick="signedUp();"> Sign Up </button>
+	</div>
+	<h4>&copy; Copyright</h4>
+</div>
+	
+<div id="contactPage">
+	<h3><div id="contactHeader">Contact Page</div>
+	<button type="button" id="addContact" onclick="addContact();">Make A New Friend?</button>
+	</h3>
+	<div id="info">
+		<div class="scrollbar">
+			<div id="head">Contact List</div>
+			<button type="button" class="contactHead" onclick ="getInfo();">Test</button>
+		</div>
+		<div class="content" id="ContactID">
+			<div id="name">A Test Name</div>
+			<div id="email">A Test Email</div>
+			<div id="phone">A Test Number</div>
+			<div id="address">A Rather Large Test Address To See How This Field Works</div>
+			<button type="button" class="deleteContact" onclick ="deleteContact();">Remove Friend Forever?</button>
+		</div>
+	</div>
 </div>
 
 </body>
