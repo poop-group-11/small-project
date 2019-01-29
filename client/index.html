@@ -2,8 +2,9 @@
 <html>
 <head>
 <title>Contact Manager</title>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="script.js"></script>
-	<link href="tester.css" rel="stylesheet">	
+	<link href="tester.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 </head>
 <body>
@@ -17,11 +18,11 @@
 		<input type="text" id="loginName" placeholder="Username" /><br />
 		<input type="password" id="loginPassword" placeholder="Password"/><br />
 		<button type="button" id="loginButton" class="buttons" onclick="doLogin();"> Login </button>
-		<button type="button" id="signInButton" class="buttons2" onclick="signUp();"> New Users </button>	
+		<button type="button" id="signInButton" class="buttons2" onclick="signUp();"> New Users </button>
 		<button type="button" id="Tester" class="buttons" onclick="doTester();"> Tester </button>
 	</div>
 
-	<div id="register"> 
+	<div id="register">
 		<img id="logo" src="images/ab2 copy.png">
 		<span id="inner-title">Please input the following</span><br />
 		<input type="text" id="loginName" placeholder="Username" /><br />
@@ -30,7 +31,7 @@
 	</div>
 	<h4>&copy; Copyright</h4>
 </div>
-	
+
 <div id="contactPage">
 	<h3><div id="contactHeader">Contact Page</div>
 	<button type="button" id="addContact" onclick="addContact();">Make A New Friend?</button>
