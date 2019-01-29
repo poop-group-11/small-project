@@ -61,7 +61,7 @@ function doLogin(){
   fetch(urlBase + "api/doLogin", fetchData)
 	.then(function(response) {
 		//TODO
-		console.log(reponses.json());
+		console.log(response.json());
 	}).catch(function(error) {
 		console.log("There has been a problem with your fetch operation: ", error.message);
 	});
