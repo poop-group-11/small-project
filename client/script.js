@@ -35,8 +35,8 @@
 		  Called upon clicking a contact. Displays contact info to user.
 */
 
-//const urlBase = "https://localhost:3001/";
-const urlBase = "/"; //For use on the production server (plz make sure this is uncommented when you push)
+const urlBase = "/";
+//const urlBase = "/"; //For use on the production server (plz make sure this is uncommented when you push)
 var extension;
 
 function doLogin(){
@@ -48,23 +48,34 @@ function doLogin(){
 
 	//Create JSON body.
 	let body = {
-		username: username,
-		password: password
+		"username": username,
+		"password": password
 	}
 	//Create parameters for fetch.
+	/*
 	let fetchData = {
 		method: "POST",
 		body: body,
 		headers: { "Content-Type": "application/json" }
 	}
 	//Fetch the data.
-  fetch(urlBase + "api/doLogin", fetchData)
+  fetch(urlBase + "api/login", fetchData)
 	.then(function(response) {
 		//TODO
 		console.log(response.json());
 	}).catch(function(error) {
 		console.log("There has been a problem with your fetch operation: ", error.message);
 	});
+	*/
+
+	$.post("/api/login", body)
+		.done(function(data) {
+			console.log(data);
+		})
+		.fail(function(err) {
+			console.log(err);
+		})
+
 	//Take JWT token from jsonRecieve and store in cookie.
 	//var parsedJson = JSON.parse(jsonRecieve);
 	//document.cookie = "token=" + parsedJson[2].id;
@@ -124,7 +135,7 @@ function signUp(){
   //Fetch the data.
   fetch(urlBase + "api/createUser", fetchData)
 	.then(function(response) {
-		console.log(reponses.json());
+		console.log(reponse.json());
 	}).catch(function(error) {
 		console.log("There has been a problem with your fetch operation: ", error.message);
 	});
