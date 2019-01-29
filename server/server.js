@@ -7,6 +7,7 @@ const User = require("./user_account");
 const Contact = require("./contact_info");
 require('dotenv').config();
 let middleware = require('./middleware');
+let jwt = require('jsonwebtoken');
 
 const API_PORT = 3001;
 const app = express();
@@ -58,7 +59,7 @@ let loginHandler =  (req, res) => {
       else {
         let token = jwt.sign(
           {username: data.username, id: data.id},
-          config.secret,
+          process.env.SECRET,
           { expiresIn: '24h'} // expires in 24 hours
         );
         // return the JWT token for the future API calls
