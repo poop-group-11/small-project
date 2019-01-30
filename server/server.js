@@ -17,9 +17,9 @@ let dbRoute;
 
 // this is our MongoDB database
 if(process.env.PROD) { //This will return true when run on our server
-    dbRoute = "mongodb://localhost:27017/contacts"; //This is our locally hosted DB.
+  dbRoute = "mongodb://localhost:27017/contacts"; //This is our locally hosted DB.
 } else {
-    dbRoute = "mongodb://poopgroup11:poopgroup11@ds257564.mlab.com:57564/contacts";
+  dbRoute = "mongodb://poopgroup11:poopgroup11@ds257564.mlab.com:57564/contacts";
 }
 
 // connects our back end code with the database
