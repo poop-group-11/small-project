@@ -42,6 +42,8 @@ app.use(bodyParser.json());
 app.use(logger("dev"));
 
 let loginHandler =  (req, res) => {
+
+  console.log(req.body);
   const { username, password } = req.body;
   // For the given username fetch user from DB
   // let mockedUsername = 'admin';
@@ -51,12 +53,19 @@ let loginHandler =  (req, res) => {
   if (username && password) {
     User.find({username: username, pass: password}, (err, data) => {
       if(err){
-        res.send(403).json({
+        return res.json({
           success: false,
-          message: 'Incorrect username or password'
+          error: err
+        });
+      }
+      else if(data.length == 0){
+        return res.json({
+          success: false,
+          message: "incorrect username or password"
         });
       }
       else {
+        console.log(data);
         let token = jwt.sign(
           {username: data.username, id: data.id},
           process.env.SECRET,
@@ -71,7 +80,7 @@ let loginHandler =  (req, res) => {
       }
     });
   } else {
-    res.send(400).json({
+    return res.json({
       success: false,
       message: 'Authentication failed! Please check the request'
     });
@@ -83,6 +92,7 @@ let loginHandler =  (req, res) => {
 router.post("/createUser", (req, res) => {
   let user = new User();
 
+  console.log(req.body);
   const{ username, password } = req.body;
 
   //prevent creation of account if something is wrong
@@ -127,9 +137,17 @@ router.post("/login", loginHandler);
 
 //create a new contact for specific user
 router.post("/createContact", middleware.checkToken, (req, res) => {
+  console.log(req);
   let contact = new Contact();
 
   const{ fname, lname, email, phone, address } = req.body;
+
+  // console.log(fname);
+  // console.log(lname);
+  // console.log(email);
+  // console.log(phone);
+  // console.log(address);
+  // console.log(req.decoded.id);
   if(!fname || !lname || !email || !phone || !address){
     return res.json({
       success: false,
@@ -137,7 +155,9 @@ router.post("/createContact", middleware.checkToken, (req, res) => {
     });
   }
 
-  contact.user = req.decoded.id;
+  console.log("DECODEDID: " + req.decoded.id);
+
+  contact.user_id = req.decoded.id;
   contact.fname = fname;
   contact.lname = lname;
   contact.email = email;
@@ -163,7 +183,7 @@ router.post("/updateContact", middleware.checkToken, (req, res) => {
 router.delete("/deleteContact", middleware.checkToken, (req, res) => {
   const { id } = req.body;
   Contact.findOneAndDelete({id:id, user:req.decoded.id }, err => {
-    if (err) return res.send(err);
+    if (err) return res.json({success: false, error: err});
     return res.json({ success: true });
   });
 });
