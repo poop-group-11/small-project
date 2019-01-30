@@ -86,6 +86,7 @@ h4{
 }
 
 h5{
+    position: absolute;
 	display: block;
     font-size: 25px;
     width: 100%;
@@ -112,6 +113,21 @@ h5{
     width: 95%;
     padding: 0% 0% 0%;
 }
+
+#signinName{
+    font-size: 20px;
+    text-align: center;
+    width: 95%;
+    padding: 0% 0% 0%;
+}
+
+#signPassword{
+    font-size: 20px;
+    text-align: center;
+    width: 95%;
+    padding: 0% 0% 0%;
+}
+
 #inner-title{
     font-family: "Lucida Console", Monaco, monospace;
     font-size: 20px;
@@ -249,6 +265,8 @@ h5{
 #contactHeader{
 	display: inline-block;
     width: 80%;
+    position: fixed;
+    z-index:400;
 }
 
 .buttons
@@ -298,28 +316,35 @@ h5{
 }
 
 .scrollbar{
+    position: absolute;
+    top:4.9%;
     display: inline-block;
     background: yellowgreen; 
     width: 15%;
-    height: 100vh;
+    height: 95%;
 	overflow-y: auto;
 }
 
 .content{
+    position: absolute;
+    left:15%;
 	visibility: hidden;
     display: inline-block;
     background: mintcream;
     width: 83%;
-	height: 100vh;
+	height: 89.5%;
+    top:10%;
 }
 
 .fields{
 	visibility: hidden;
     display: inline-block;
     background: mintcream;
+    top:4.9%;
     width: 83%;
-	height: 100vh;
+    left: 15%;
 	position: fixed;
+    height: 89.5%;
 }
 
 button.contactHead{
@@ -330,16 +355,18 @@ button.contactHead{
 	color: mintcream;
 }
 
-button.addContact{
+.addbutton{
 	display: inline-block;
+    position: absolute;
 	width: 20%;
-	font-size: 24px;
+    right: 8%;
+	font-size: 20px;
     text-align: center;
     border:none;
     color: white;
     background-color: green;
     opacity: 2;
-    width: 95%;
+    width: 20%;
     margin-left: 0%;
     font-family: 'Ubuntu', sans-serif;
     -webkit-transition-duration: 0.4s; /* Safari */
@@ -348,6 +375,7 @@ button.addContact{
 }
 
 button.deleteContact{
+    position: absolute;
 	display: block;
 	background: red;
 	width: 100%;

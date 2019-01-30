@@ -25,16 +25,16 @@
 	<div id="register">
 		<img id="logo" src="images/ab2 copy.png">
 		<span id="inner-title">Please input the following</span><br />
-		<input type="text" id="loginName" placeholder="Username" /><br />
-		<input type="password" id="loginPassword" placeholder="Password"/><br />
-		<button type="button" id="loginButton" class="buttons" onclick="signUp();"> Sign Up </button>
+		<input type="text" id="signinName" placeholder="Username" /><br />
+		<input type="password" id="signPassword" placeholder="Password"/><br />
+		<button type="button" id="signInButton" class="buttons" onclick="signUp();"> Sign Up </button>
 	</div>
 	<h4>&copy; Copyright</h4>
 </div>
 
 <div id="contactPage">
-	<h5><div id="contactHeader">Contact Page</div>
-	<button type="button" id="addContact" onclick="addContactPrompt();">Make A New Friend?</button>
+	<h5> Your P.O.O.P Contact's
+	<button type="button" id="addContact" class="addbutton" onclick="addContactPrompt();">Make A New Friend?</button>
 	</h5>
 	<div id="info">
 		<div class="scrollbar">
@@ -53,7 +53,7 @@
 			<input type="text" id="newEmail" placeholder="Their Email?" /><br />
 			<input type="text" id="newPhone" placeholder="Their Phone Number?" /><br />
 			<input type="text" id="newAddress" placeholder="Their Address?" /><br />
-			<button type="button" class="deleteContact" onclick ="addContact();">Make A New Friend Forever.</button>
+			<button type="button" id="deleteContact" class="button" onclick ="addContact();">Make A New Friend Forever.</button>
 		</div>
 	</div>
 </div>
