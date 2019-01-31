@@ -187,7 +187,7 @@ router.post("/updateContact", middleware.checkToken, (req, res) => {
 
 router.delete("/deleteContact", middleware.checkToken, (req, res) => {
   const { id } = req.body;
-  Contact.findOneAndDelete({id:id, user:req.decoded.id }, err => {
+  Contact.findOneAndDelete({ _id:ObjectId(id), user_id: ObjectId(req.decoded.id) }, err => {
     if (err) return res.json({success: false, error: err});
     return res.json({ success: true });
   });
@@ -196,7 +196,8 @@ router.delete("/deleteContact", middleware.checkToken, (req, res) => {
 
 //TODO: figure out how to use .find() for particular ID
 router.get("/getContacts", middleware.checkToken, (req, res) => {
-  Contact.find({ user: req.decoded.id }, (err, data) => {
+
+  Contact.find({ user_id: ObjectId(req.decoded.id) }, (err, data) => {
     if (err) return res.json({ success: false, error: err });
     return res.json({ success: true, data: data });
   });
