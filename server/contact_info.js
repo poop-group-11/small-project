@@ -12,7 +12,7 @@ const NumberSchema = new Schema(
 
 const ContactSchema = new Schema(
   {
-    id: Number,
+    user_id: String,
     user: Number,
     fname: String,
     lname: String,

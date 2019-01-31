@@ -66,7 +66,7 @@ let loginHandler =  (req, res) => {
       }
       else {
         // console.log(data);
-        // console.log("ID: " + data[0]._id);
+        console.log("ID: " + data[0]._id);
         let token = jwt.sign(
           {username: data[0].username, id: data[0]._id},
           process.env.SECRET,
@@ -156,7 +156,7 @@ router.post("/createContact", middleware.checkToken, (req, res) => {
     });
   }
 
-  // console.log("DECODEDID: " + req.decoded.id);
+  console.log("DECODEDID: " + req.decoded.id);
 
   contact.user_id = req.decoded.id;
   contact.fname = fname;
