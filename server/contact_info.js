@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+var ObjectId = mongoose.Schema.Types.ObjectId;
 
 // Create Schema and Model
 const NumberSchema = new Schema(
@@ -12,7 +13,7 @@ const NumberSchema = new Schema(
 
 const ContactSchema = new Schema(
   {
-    user_id: String,
+    user_id: {type:ObjectId, ref: 'User'},
     user: Number,
     fname: String,
     lname: String,
@@ -22,7 +23,7 @@ const ContactSchema = new Schema(
   },
   { timestamps: true }
 );
-
+Number
 const Contact = mongoose.model('Contact', ContactSchema);
 
 // Export so we can use in other files in this project

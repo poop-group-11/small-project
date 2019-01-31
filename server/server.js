@@ -8,6 +8,8 @@ const Contact = require("./contact_info");
 require('dotenv').config();
 let middleware = require('./middleware');
 let jwt = require('jsonwebtoken');
+var ObjectId = mongoose.Types.ObjectId;
+
 
 const API_PORT = 3001;
 const app = express();
@@ -175,7 +177,9 @@ router.post("/createContact", middleware.checkToken, (req, res) => {
 //TODO: updatecontact
 router.post("/updateContact", middleware.checkToken, (req, res) => {
   const { id, update } = req.body;
-  Contacts.findOneAndUpdate({ id:id, user:req.decoded.id }, update, err => {
+  // console.log(update);
+  // console.log(req.decoded.id);
+  Contact.findOneAndUpdate({ _id:ObjectId(id), user_id: ObjectId(req.decoded.id) },  update, err => {
     if(err) return res.json({ success: false, error: err });
     return res.json({ success: true });
   });
@@ -192,7 +196,7 @@ router.delete("/deleteContact", middleware.checkToken, (req, res) => {
 
 //TODO: figure out how to use .find() for particular ID
 router.get("/getContacts", middleware.checkToken, (req, res) => {
-  Contacts.find({ user: req.decoded.id }, (err, data) => {
+  Contact.find({ user: req.decoded.id }, (err, data) => {
     if (err) return res.json({ success: false, error: err });
     return res.json({ success: true, data: data });
   });
