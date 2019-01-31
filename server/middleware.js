@@ -9,7 +9,10 @@ let checkToken = (req, res, next) => {
   }
 
   if (token) {
+    // console.log("TOKEN: " + token);s
     jwt.verify(token, process.env.SECRET, (err, decoded) => {
+      // console.log("DECODED: ");
+      // console.log(decoded);
       if (err) {
         return res.json({
           success: false,

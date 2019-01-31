@@ -65,9 +65,10 @@ let loginHandler =  (req, res) => {
         });
       }
       else {
-        console.log(data);
+        // console.log(data);
+        // console.log("ID: " + data[0]._id);
         let token = jwt.sign(
-          {username: data.username, id: data.id},
+          {username: data[0].username, id: data[0]._id},
           process.env.SECRET,
           { expiresIn: '24h'} // expires in 24 hours
         );
@@ -114,8 +115,8 @@ router.post("/createUser", (req, res) => {
         error: error
       });
     }else if(data.length == 0){
-      console.log(data);
-      console.log("Saving User: " + username);
+      // console.log(data);
+      // console.log("Saving User: " + username);
       //otherwise post data
       user.username = username;
       user.pass = password;
@@ -124,7 +125,7 @@ router.post("/createUser", (req, res) => {
         return res.json({ success:true });
       });
     }else{
-      console.log(data);
+      // console.log(data);
       return res.json({
         success: false,
         message: 'Username already exists'
@@ -137,7 +138,7 @@ router.post("/login", loginHandler);
 
 //create a new contact for specific user
 router.post("/createContact", middleware.checkToken, (req, res) => {
-  console.log(req);
+  // console.log(req);
   let contact = new Contact();
 
   const{ fname, lname, email, phone, address } = req.body;
@@ -155,7 +156,7 @@ router.post("/createContact", middleware.checkToken, (req, res) => {
     });
   }
 
-  console.log("DECODEDID: " + req.decoded.id);
+  // console.log("DECODEDID: " + req.decoded.id);
 
   contact.user_id = req.decoded.id;
   contact.fname = fname;
