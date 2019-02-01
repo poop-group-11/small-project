@@ -38,14 +38,19 @@
 //const urlBase = "http://localhost:3001/";
 const urlBase = "https://poopgroup11.xyz/"; //For use on the production server (plz make sure this is uncommented when you push)
 var extension;
+var user_token;
+var USERNAME;
 
-function doLogin(){
-	hideOrShow("logIn", false);
+function doLogin(username, password){
 	hideOrShow("register", false);
 
-  var username = document.getElementById("loginName").value; //Assign from user field.
-  var password = document.getElementById("loginPassword").value; //Assign from pass field.
+	if(!username || !password)
+	{
+		username = document.getElementById("loginName").value; //Assign from user field.
+		password = document.getElementById("loginPassword").value; //Assign from pass field.
+	}
 
+	USERNAME = username;
 	//Create JSON body.
 	let body = {
 		"username": username,
@@ -70,10 +75,21 @@ function doLogin(){
 
 	$.post(urlBase + "api/login", body)
 		.done(function(data) {
-			console.log(data);
+			if(data.success === false){
+				alert("Could not login: \n" + data.message );
+			}
+			else{
+				console.log(data);
+				if(data.token)
+					user_token = data.token;
+				hideOrShow("Front Page", false);
+				hideOrShow("contactPage", true);
+			}
+
 		})
 		.fail(function(err) {
 			console.log(err);
+			alert("Could not login: \n" + err);
 		})
 
 	//Take JWT token from jsonRecieve and store in cookie.
@@ -142,6 +158,7 @@ function signUp(){
 	    dataType: 'json',
 	    success: function (data) {
 	        console.log(data);
+	        doLogin(body.username, body.password);
 	    },
 		error: function (error){
 			console.log("ERROR CREATING USER: ");
