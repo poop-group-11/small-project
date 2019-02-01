@@ -41,6 +41,7 @@ var extension;
 var user_token;
 var USERNAME;
 var CONTACTS;
+var currentIndex;
 
 function doLogin(username, password){
 	hideOrShow("register", false);
@@ -108,6 +109,7 @@ function addContactPrompt(){
 }
 
 function displayContact(index){
+	currentIndex = index;
 	pradBullshit("currentContact", true);
 	pradBullshit("NewFriends", false);
 	$("#name").html(CONTACTS[index].fname + " " + CONTACTS[index].lname);
@@ -239,6 +241,31 @@ function deleteContactPrompt(){
 
 function deleteContact(){
 	// Delete request
+	body = {
+		id: CONTACTS[currentIndex]._id
+	}
+
+	$.ajax({
+		url: urlBase + 'api/deleteContact',
+	    type: 'delete',
+	    data: JSON.stringify(body),
+	    headers: { "Content-Type": "application/json", "Authorization": "Bearer " + user_token },
+	    dataType: 'json',
+	    success: function (data) {
+	    	console.log(data);
+	        if(data.success === false){
+				alert("Could not Delete Contact: \n" + data.error._message );
+			}
+			else{
+				getContacts();
+			}
+	    },
+		error: function (error){
+			console.log("ERROR DELETING USER: ");
+    		console.log(error);
+		}
+	});
+
 }
 
 function viewContact(){
