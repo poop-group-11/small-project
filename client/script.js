@@ -1,48 +1,14 @@
-/*List of Functions:
-		1. doLogin()/auth() -
-			Called upon clicking the login button. Captures login and password to
-			.json to be sent to API. Password is hashed. Upon recieving response,
-			either transfer to contacts screen or throw error if invalid login.
-		2. signUpPrompt() -
-			Called upon clicking sign up button. Changes login screen to signUp input.
-			Displays password requirements.
-		3. signUp() -
-			Called upon creating a new account. Captures login and password to .json
-			to be sent to the API. Password is hashed. Transfer to contacts screen on
-			response.
-		4. pullContacts() -
-		  Called as needed for updates to contacts. Sends .json request for users
-			contacts. Upon recieving response display contact info on contacts screen.
-		5. createContactPrompt() -
-		  Called upon clicking create contact option. Displays prompt for creating
-			a new contact.
-		6. createContact() -
-		  Called upon creating a new contact. Captures contact info to .json to be
-			sent to API. Returns to contact screen.
-		7. updateContactPrompt() -
-		  Called upon clicking update contact option. Displays prompt for updating
-			an existing contact.
-		8. updateContact() -
-		  Called upon updating a contact. Captures changed info to .json to be sent
-			to API. Returns to contact screen.
-		9. deleteContactPrompt() -
-		  Called upon clicking delete contact option. Displays prompt for deleting
-			an existing contact.
-		10.deleteContact() -
-		  Called upon deleting a contact. Captures contact id into .json to be sent
-			to API. Returns to contact screen.
-		11.viewContact() -
-		  Called upon clicking a contact. Displays contact info to user.
-*/
-
 //const urlBase = "http://localhost:3001/";
 const urlBase = "https://poopgroup11.xyz/"; //For use on the production server (plz make sure this is uncommented when you push)
 var extension;
-var user_token;
 var USERNAME;
 var CONTACTS;
 var currentIndex;
 
+/* doLogin() : Called either on registration or login.
+  Sends username and password to server with POST request.
+	Stores JWT token in cookies.
+*/
 function doLogin(username, password){
 	hideOrShow("register", false);
 
@@ -67,7 +33,7 @@ function doLogin(username, password){
 			else{
 				console.log(data);
 				if(data.token)
-					user_token = data.token;
+					document.cookie = data.token;
 				hideOrShow("Front Page", false);
 				hideOrShow("contactPage", true);
 				getContacts();
@@ -109,7 +75,6 @@ function addContactPrompt(){
 }
 
 function displayContact(index){
-	currentIndex = index;
 	pradBullshit("currentContact", true);
 	pradBullshit("NewFriends", false);
 	$("#name").html(CONTACTS[index].fname + " " + CONTACTS[index].lname);
@@ -118,6 +83,10 @@ function displayContact(index){
 	$("#address").html(CONTACTS[index].address);
 }
 
+/* signUp() - Called upon account creation.
+  Sends POST request to create account. If Successful calls doLogin() to
+	immediately login.
+*/
 function signUp(){
 	hideOrShow("register", false);
 	hideOrShow("logIn", true);
@@ -127,15 +96,8 @@ function signUp(){
 
 	//Create JSON Body.
 	let body = {
-		username: username,
-		password: password
-	}
-
-  //Create parameters for fetch.
-	let fetchData = {
-		method: "POST",
-		body: JSON.stringify(body),
-		headers: { "Content-Type": "application/json" }
+		"username": username,
+		"password": password
 	}
 
 	$.ajax({
@@ -155,6 +117,9 @@ function signUp(){
 	});
 }
 
+/* getContacts() - called upon login. *maybe other times not sure*
+  Sends GET request for contacts. Displays contacts to contacts screen.
+*/
 function getContacts(){
 	//Get request
 	var contactsList;
@@ -180,12 +145,11 @@ function getContacts(){
     		console.log(error);
 		}
 	});
-
 }
 
-function createContactPrompt(){
-}
-
+/* createContact() - Called upon contact creation.
+  Sends a POST request. Displays new contact to screen.
+*/
 function createContact(){
 
 	var fname = document.getElementById("newFirstName").value;
@@ -193,8 +157,6 @@ function createContact(){
 	var email = document.getElementById("newEmail").value;
 	var phone = document.getElementById("newPhone").value;
 	var address = document.getElementById("newAddress").value;
-
-
 
 	//Generate createContact json.
 	let body = {
@@ -209,7 +171,7 @@ function createContact(){
 		url: urlBase + 'api/createContact',
 	    type: 'post',
 	    data: JSON.stringify(body),
-	    headers: { "Content-Type": "application/json", "Authorization": "Bearer " + user_token },
+	    headers: { "Content-Type": "application/json", "Authorization": "Bearer " + document.cookie },
 	    dataType: 'json',
 	    success: function (data) {
 	    	console.log(data);
@@ -229,46 +191,40 @@ function createContact(){
 
 }
 
-function updateContactPrompt(){
-}
-
+/* updateContact() - Called upon updating a contact.
+  Sends a POST request containing update information. Displays updated info.
+*/
 function updateContact(){
-	//POST request
 }
 
-function deleteContactPrompt(){
-}
-
+/* deleteContact() - Called upon deleting a contact.
+  Sends a DELETE request. Removes contact display.
+*/
 function deleteContact(){
-	// Delete request
 	body = {
 		id: CONTACTS[currentIndex]._id
 	}
 
 	$.ajax({
 		url: urlBase + 'api/deleteContact',
-	    type: 'delete',
-	    data: JSON.stringify(body),
-	    headers: { "Content-Type": "application/json", "Authorization": "Bearer " + user_token },
-	    dataType: 'json',
-	    success: function (data) {
-	    	console.log(data);
-	        if(data.success === false){
+			type: 'delete',
+			data: JSON.stringify(body),
+			headers: { "Content-Type": "application/json", "Authorization": "Bearer " + user_token },
+			dataType: 'json',
+			success: function (data) {
+				console.log(data);
+					if(data.success === false){
 				alert("Could not Delete Contact: \n" + data.error._message );
 			}
 			else{
 				getContacts();
 			}
-	    },
+			},
 		error: function (error){
 			console.log("ERROR DELETING USER: ");
-    		console.log(error);
+				console.log(error);
 		}
 	});
-
-}
-
-function viewContact(){
 }
 
 function hideOrShow( elementId, showState ){
@@ -283,61 +239,3 @@ function hideOrShow( elementId, showState ){
 	document.getElementById( elementId ).style.visibility = vis;
 	document.getElementById( elementId ).style.display = dis;
 }
-
-/*
-function get(url){
-	var xhr = new XMLHttpRequest();
-	xhr.open("GET", url, true);
-	xhr.setRequestHeader("Content-type", "Authorization: Bearer " + document.cookie); //TODO: figure out what is supposed to go here.
-	try{
-		xhr.onreadystatechange = function(){
-			if(this.readyState == 4 && this.status == 200){
-				var jsonRecieve = JSON.parse( xhr.responseText );
-			}
-		};
-		xhr.send();
-	}
-	catch(err)
-	{
-		//TODO: Process err.message
-	}
-  return jsonRecieve;
-}
-
-function post(jsonSend, url){
-	var xhr = new XMLHttpRequest();
-	xhr.open("POST", url, true);
-	xhr.setRequestHeader("Content-type", "Authorization: Bearer " + document.cookie); //TODO: figure out what is supposed to go here.
-	try{
-		xhr.onreadystatechange = function(){
-			if(this.readystate = 4 && this.status == 200){
-				var jsonRecieve = JSON.parse(  xhr.responsetext );
-			}
-		};
-		xhr.send(jsonSend);
-	}
-	catch(err)
-	{
-		//TODO: process err.message
-	}
-	return jsonRecieve;
-}
-
-function delete(jsonSend, url){
-	var xhr = new XMLHttpRequest();
-	xhr.open("DELETE", url, true);
-	xhr.setRequestHeader("Content-Type", "Authorization: Bearer " + document.cookie);
-	try{
-		xhr.onreadystatechange = function(){
-			if(this.readystate = 4 && this.status == 200){
-				var jsonRecieve = JSON.parse(  xhr.responsetext );
-			}
-		};
-		xhr.send();
-	}
-	catch(err)
-	{
-		//TODO: process err.message
-	}
-	return jsonRecieve;
-}*/
