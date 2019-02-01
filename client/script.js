@@ -126,7 +126,7 @@ function getContacts(){
 	$.ajax({
 	    url: urlBase + 'api/getContacts',
 	    type: 'get',
-	    headers: { "Authorization": "Bearer " + user_token },
+	    headers: { "Authorization": "Bearer " + document.cookie },
 	    dataType: 'json',
 	    success: function (res) {
 	        console.log(res);
@@ -209,7 +209,7 @@ function deleteContact(){
 		url: urlBase + 'api/deleteContact',
 			type: 'delete',
 			data: JSON.stringify(body),
-			headers: { "Content-Type": "application/json", "Authorization": "Bearer " + user_token },
+			headers: { "Content-Type": "application/json", "Authorization": "Bearer " + document.cookie },
 			dataType: 'json',
 			success: function (data) {
 				console.log(data);
