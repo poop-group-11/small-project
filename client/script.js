@@ -40,6 +40,7 @@ const urlBase = "https://poopgroup11.xyz/"; //For use on the production server (
 var extension;
 var user_token;
 var USERNAME;
+var CONTACTS;
 
 function doLogin(username, password){
 	hideOrShow("register", false);
@@ -106,9 +107,13 @@ function addContactPrompt(){
 	pradBullshit("NewFriends", true);
 }
 
-function testerTwo(){
+function displayContact(index){
 	pradBullshit("currentContact", true);
 	pradBullshit("NewFriends", false);
+	$("#name").html(CONTACTS[index].fname + " " + CONTACTS[index].lname);
+	$("#email").html(CONTACTS[index].email);
+	$("#phone").html(CONTACTS[index].phone);
+	$("#address").html(CONTACTS[index].address);
 }
 
 function signUp(){
@@ -158,8 +163,10 @@ function getContacts(){
 	    dataType: 'json',
 	    success: function (res) {
 	        console.log(res);
+	        CONTACTS = res.data;
+	        var i =0;
 			contactsList = res.data.map((contact) => {
-				 return '<li><div id="contact">' + contact.fname  +  " " + contact.lname + '</div></li>';
+				return '<li><div id="contact" onClick=\"displayContact('+ i++ +')\">' + contact.fname  +  " " + contact.lname + '</div></li>';
 			});
 			console.log(contactsList);
 			$("#contactList").html(function(){
@@ -192,7 +199,7 @@ function createContact(){
 		fname : fname,
 		lname : lname,
 		email : email,
-		phone : [{home: parseInt(phone)}],
+		phone : phone,
 		address : address
 	}
 
