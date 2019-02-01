@@ -34,19 +34,22 @@
 
 <div id="contactPage">
 	<h5> Your P.O.O.P Contacts
-	<button type="button" id="addContact" class="addbutton" onclick="addContactPrompt();">Make A New Friend?</button>
+	<button type="button" id="addContact" class="addbutton" onclick="addContactPrompt();">Create a New Contact</button>
 	</h5>
 	<div id="info">
 		<div class="scrollbar">
 			<div id="head">Contact List</div>
 			<button type="button" class="contactHead" onclick ="testerTwo();">Test</button>
+			<div id="contactList">
+
+			</div>
 		</div>
-		<div class="content" id="ContactID">
+		<div class="content" id="currentContact">
 			<div id="name">A Test Name</div>
 			<div id="email">A Test Email</div>
 			<div id="phone">A Test Number</div>
 			<div id="address">A Rather Large Test Address To See How This Field Works</div>
-			<button type="button" class="deleteContact" onclick ="deleteContact();">Remove Friend Forever?</button>
+			<button type="button" class="deleteContact" onclick ="deleteContact();">Delete Contact</button>
 		</div>
 		<div class="fields" id="NewFriends">
 			<input type="text" id="newFirstName" placeholder="Their First Name?" /><br />
@@ -54,7 +57,7 @@
 			<input type="text" id="newEmail" placeholder="Their Email?" /><br />
 			<input type="text" id="newPhone" placeholder="Their Phone Number?" /><br />
 			<input type="text" id="newAddress" placeholder="Their Address?" /><br />
-			<button type="button" id="deleteContact" class="button" onclick ="addContact();">Make A New Friend Forever.</button>
+			<button type="button" id="deleteContact" class="button" onclick ="createContact();">Make A New Friend Forever.</button>
 		</div>
 	</div>
 </div>

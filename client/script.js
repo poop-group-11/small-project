@@ -56,22 +56,6 @@ function doLogin(username, password){
 		"username": username,
 		"password": password
 	}
-	//Create parameters for fetch.
-	/*
-	let fetchData = {
-		method: "POST",
-		body: body,
-		headers: { "Content-Type": "application/json" }
-	}
-	//Fetch the data.
-  fetch(urlBase + "api/login", fetchData)
-	.then(function(response) {
-		//TODO
-		console.log(response.json());
-	}).catch(function(error) {
-		console.log("There has been a problem with your fetch operation: ", error.message);
-	});
-	*/
 
 	$.post(urlBase + "api/login", body)
 		.done(function(data) {
@@ -84,6 +68,7 @@ function doLogin(username, password){
 					user_token = data.token;
 				hideOrShow("Front Page", false);
 				hideOrShow("contactPage", true);
+				getContacts();
 			}
 
 		})
@@ -91,10 +76,6 @@ function doLogin(username, password){
 			console.log(err);
 			alert("Could not login: \n" + err);
 		})
-
-	//Take JWT token from jsonRecieve and store in cookie.
-	//var parsedJson = JSON.parse(jsonRecieve);
-	//document.cookie = "token=" + parsedJson[2].id;
 }
 
 function pradBullshit(elementId, showState){
@@ -121,12 +102,12 @@ function signUpPrompt(){
 }
 
 function addContactPrompt(){
-	pradBullshit("ContactID", false);
+	pradBullshit("currentContact", false);
 	pradBullshit("NewFriends", true);
 }
 
 function testerTwo(){
-	pradBullshit("ContactID", true);
+	pradBullshit("currentContact", true);
 	pradBullshit("NewFriends", false);
 }
 
@@ -165,45 +146,31 @@ function signUp(){
     		console.log(error);
 		}
 	});
-  //Fetch the data.
- // fetch(urlBase + "api/createUser", fetchData)
-	// .then(res => res.json())
-	// .then(response => {
-	// 	console.log(reponse);
-	// })
-	// .catch(error => {
-	// 	console.log("There has been a problem with your fetch operation: ", error.message);
-	// });
-
-/*
-	let username.getElementById("loginName");
-	let password = document.getElementById("loginPassword");
-
-	let body = {
-		username: username,
-		password: password
-	}
-
-	let method = "POST";
-	headers = { 'Content-type: application/json' };
-
-	fetch(urlBase + "api/createUser", {
-		method: method,
-		body: body,
-		headers: headers
-	}).then(res => {
-		console.log(res.json());
-	});
-*/
-
-
-	//Take JWT token from jsonRecieve and store in cookie.
-	//var parsedJson = JSON.parse(jsonRecieve);
-	//document.cookie = "token=" + parsedJson[2].id;
 }
 
 function getContacts(){
 	//Get request
+	var contactsList;
+	$.ajax({
+	    url: urlBase + 'api/getContacts',
+	    type: 'get',
+	    headers: { "Authorization": "Bearer " + user_token },
+	    dataType: 'json',
+	    success: function (res) {
+	        console.log(res);
+			contactsList = res.data.map((contact) => {
+				 return '<li><div id="contact">' + contact.fname  +  " " + contact.lname + '</div></li>';
+			});
+			console.log(contactsList);
+			$("#contactList").html(function(){
+				return "<ul>" + contactsList.join("") + "</ul>";
+			});
+	    },
+		error: function (error){
+			console.log("ERROR GETTING CONTACTS: ");
+    		console.log(error);
+		}
+	});
 
 }
 
@@ -212,34 +179,44 @@ function createContactPrompt(){
 
 function createContact(){
 
-	var fname;
-	var lname;
-	var email;
-	var phone;
-	var address;
+	var fname = document.getElementById("newFirstName").value;
+	var lname = document.getElementById("newLastName").value;
+	var email = document.getElementById("newEmail").value;
+	var phone = document.getElementById("newPhone").value;
+	var address = document.getElementById("newAddress").value;
+
+
 
 	//Generate createContact json.
 	let body = {
 		fname : fname,
 		lname : lname,
 		email : email,
-		phone : phone,
+		phone : [{home: parseInt(phone)}],
 		address : address
 	}
-	//Create parameters for fetch.
-	let fetchData = {
-		method: "POST",
-		body: body,
-		headers: { "Content-Type" : "application/json",
-	             "Authorization" : "Bearer " + document.cookie }
-	}
-  //Fetch the Data
-	fetch(urlBase + "api/createContact", fetchData)
-	.then(function(response) {
-		console.log(reponses.json());
-	}).catch(function(error) {
-		console.log("There has been a problem with your fetch operation: ", error.message);
+
+	$.ajax({
+		url: urlBase + 'api/createContact',
+	    type: 'post',
+	    data: JSON.stringify(body),
+	    headers: { "Content-Type": "application/json", "Authorization": "Bearer " + user_token },
+	    dataType: 'json',
+	    success: function (data) {
+	    	console.log(data);
+	        if(data.success === false){
+				alert("Could not Create Contact: \n" + data.error._message );
+			}
+			else{
+				getContacts();
+			}
+	    },
+		error: function (error){
+			console.log("ERROR CREATING USER: ");
+    		console.log(error);
+		}
 	});
+
 
 }
 
