@@ -269,6 +269,22 @@ h5{
     z-index:400;
 }
 
+#contactList{
+	display: inline-block;
+	overflow-y: auto;
+	width: 100%;
+	height: 100%;
+}
+
+#searchBar{
+    width: 98%;
+    height: 20px;
+    text-align: center;
+    font-size: 18px;
+	position: sticky;
+}
+
+
 .buttons
 {
     font-size: 24px;
@@ -322,7 +338,6 @@ h5{
     background: yellowgreen;
     width: 20%;
     height: 100%;
-	overflow-y: auto;
 }
 
 .content{
@@ -382,11 +397,4 @@ button.deleteContact{
 	height: 25px;
 	font-size: 20px;
 	color: white;
-}
-
-#searchBar{
-    width: 98%;
-    height: 20px;
-    text-align: center;
-    font-size: 18px;
 }
