@@ -35,8 +35,8 @@
 		  Called upon clicking a contact. Displays contact info to user.
 */
 
-const urlBase = "/";
-//const urlBase = "/"; //For use on the production server (plz make sure this is uncommented when you push)
+//const urlBase = "http://localhost:3001/";
+const urlBase = "/"; //For use on the production server (plz make sure this is uncommented when you push)
 var extension;
 
 function doLogin(){
@@ -118,25 +118,28 @@ function signUp(){
 	hideOrShow("register", false);
 	hideOrShow("logIn", true);
 
-	var username = document.getElementById("loginName").value; //WARNING id may change in future updates to html.
-	var password = document.getElementById("loginPassword").value; //WARNING id may change in future updates to html.
+	var username = document.getElementById("signinName").value; //WARNING id may change in future updates to html.
+	var password = document.getElementById("signPassword").value; //WARNING id may change in future updates to html.
 
 	//Create JSON Body.
 	let body = {
 		username: username,
 		password: password
 	}
+
   //Create parameters for fetch.
 	let fetchData = {
 		method: "POST",
-		body: body,
+		body: JSON.stringify(body),
 		headers: { "Content-Type": "application/json" }
 	}
   //Fetch the data.
   fetch(urlBase + "api/createUser", fetchData)
-	.then(function(response) {
-		console.log(reponse.json());
-	}).catch(function(error) {
+	.then(res => res.json())
+	.then(response => {
+		console.log(reponse);
+	})
+	.catch(error => {
 		console.log("There has been a problem with your fetch operation: ", error.message);
 	});
 
@@ -169,7 +172,7 @@ function signUp(){
 
 function getContacts(){
 	//Get request
-	
+
 }
 
 function createContactPrompt(){
