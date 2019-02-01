@@ -274,14 +274,16 @@ h5{
 	overflow-y: auto;
 	width: 100%;
 	height: 100%;
+	margin-top: 10px;
 }
 
 #searchBar{
-    width: 98%;
+    width: 93%;
     height: 20px;
     text-align: center;
     font-size: 18px;
 	position: sticky;
+	margin-bottom: 3px;
 }
 
 
