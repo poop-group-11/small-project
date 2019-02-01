@@ -7,12 +7,13 @@ const User = require("./user_account");
 const Contact = require("./contact_info");
 require('dotenv').config();
 let middleware = require('./middleware');
+let cors = require('cors');
 let jwt = require('jsonwebtoken');
 var ObjectId = mongoose.Types.ObjectId;
 
-
 const API_PORT = 3001;
 const app = express();
+app.use(cors());
 const router = express.Router();
 
 let dbRoute;
@@ -42,6 +43,24 @@ db.on("error", console.error.bind(console, "MongoDB connection error:"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(logger("dev"));
+
+app.use(function(req, res, next) {
+    console.log("GOT A REQUeST");
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+
+    //intercepts OPTIONS method
+    if ('OPTIONS' === req.method) {
+      //respond with 200
+      res.send(200);
+    }
+    else {
+    //move on
+      next();
+    }
+});
+
 
 let loginHandler =  (req, res) => {
 
@@ -90,9 +109,16 @@ let loginHandler =  (req, res) => {
   }
 }
 
+router.options("/*", cors(), (req, res) => {
+  console.log("RECIEVED OPTIONS REQUEST");
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+  res.send(200);
+});
 
 //Create user in database when client wants to register a new account
-router.post("/createUser", (req, res) => {
+router.post("/createUser",  (req, res) => {
   let user = new User();
 
   console.log(req.body);
