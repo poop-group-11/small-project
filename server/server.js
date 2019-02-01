@@ -109,12 +109,12 @@ let loginHandler =  (req, res) => {
   }
 }
 
-router.options("/*", cors(), (req, res) => {
+router.options("*", cors(), (req, res) => {
   console.log("RECIEVED OPTIONS REQUEST");
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
-  res.send(200);
+  return res.json({ success: true });
 });
 
 //Create user in database when client wants to register a new account

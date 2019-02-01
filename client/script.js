@@ -36,7 +36,7 @@
 */
 
 //const urlBase = "http://localhost:3001/";
-const urlBase = "/"; //For use on the production server (plz make sure this is uncommented when you push)
+const urlBase = "https://poopgroup11.xyz/"; //For use on the production server (plz make sure this is uncommented when you push)
 var extension;
 
 function doLogin(){
@@ -68,7 +68,7 @@ function doLogin(){
 	});
 	*/
 
-	$.post("/api/login", body)
+	$.post(urlBase + "api/login", body)
 		.done(function(data) {
 			console.log(data);
 		})
@@ -133,15 +133,30 @@ function signUp(){
 		body: JSON.stringify(body),
 		headers: { "Content-Type": "application/json" }
 	}
-  //Fetch the data.
-  fetch(urlBase + "api/createUser", fetchData)
-	.then(res => res.json())
-	.then(response => {
-		console.log(reponse);
-	})
-	.catch(error => {
-		console.log("There has been a problem with your fetch operation: ", error.message);
+
+	$.ajax({
+	    url: urlBase + 'api/createUser',
+	    type: 'post',
+	    data: JSON.stringify(body),
+	    headers: { "Content-Type": "application/json" },
+	    dataType: 'json',
+	    success: function (data) {
+	        console.log(data);
+	    },
+		error: function (error){
+			console.log("ERROR CREATING USER: ");
+    		console.log(error);
+		}
 	});
+  //Fetch the data.
+ // fetch(urlBase + "api/createUser", fetchData)
+	// .then(res => res.json())
+	// .then(response => {
+	// 	console.log(reponse);
+	// })
+	// .catch(error => {
+	// 	console.log("There has been a problem with your fetch operation: ", error.message);
+	// });
 
 /*
 	let username.getElementById("loginName");
