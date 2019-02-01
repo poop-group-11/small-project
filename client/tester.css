@@ -82,22 +82,21 @@ h4{
     color: white;
     background-color: yellowgreen;
     opacity:90%;
-    padding: .5% 0% .5%;;
+    padding: .5% 0% .5%;
 }
 
 h5{
     position: absolute;
-	display: block;
-    font-size: 25px;
-    width: 100%;
+    font-size: 2vw;
+    height: 3.3%;
+    width: 97.5%;
     z-index: 250;
-    margin: 0px;
     overflow: hidden;
     text-align: left;
     font-family: "Lucida Console", Monaco, monospace;
     color: white;
   	background-color: limegreen;
-    padding: .5% 2.5% .5%;
+    padding: .5% 0% .5% 2.5%;
 }
 
 #loginName{
@@ -234,11 +233,11 @@ h5{
 	display: block;
 	width: 100%;
 	background: mintcream;
-	height: calc(40% - 25px);
+	height: calc(20%);
 	font-size: 20px;
 }
 
-#deleteContact{
+#makeContact{
 	display: block;
 	background: red;
 	width: 100%;
@@ -257,9 +256,10 @@ h5{
 }
 
 #info{
-	display: block;
-	height: 90vh;
-	width: auto;
+    position: fixed;
+    top:5%;
+    width: 100%;
+	height: 95%;
 }
 
 #contactHeader{
@@ -316,24 +316,21 @@ h5{
 }
 
 .scrollbar{
-    position: absolute;
-    top:4.9%;
     display: inline-block;
     background: yellowgreen; 
-    width: 15%;
-    height: 95%;
+    width: 20%;
+    height: 100%;
 	overflow-y: auto;
 }
 
 .content{
     position: absolute;
-    left:15%;
+    left:20%;
 	visibility: hidden;
     display: inline-block;
     background: mintcream;
-    width: 83%;
-	height: 89.5%;
-    top:10%;
+    width: 80%;
+	height: 100%;
 }
 
 .fields{
@@ -341,10 +338,11 @@ h5{
     display: inline-block;
     background: mintcream;
     top:4.9%;
-    width: 83%;
-    left: 15%;
+    width: 80%;
+    left: 20%;
 	position: fixed;
-    height: 89.5%;
+    height: 100%;
+    overflow-y: scroll;
 }
 
 button.contactHead{
@@ -358,16 +356,15 @@ button.contactHead{
 .addbutton{
 	display: inline-block;
     position: absolute;
-	width: 20%;
     right: 8%;
-	font-size: 20px;
+	font-size: 1vw;
     text-align: center;
     border:none;
     color: white;
     background-color: green;
     opacity: 2;
+    height: 60%;
     width: 20%;
-    margin-left: 0%;
     font-family: 'Ubuntu', sans-serif;
     -webkit-transition-duration: 0.4s; /* Safari */
     transition-duration: 0.4s;
@@ -376,6 +373,7 @@ button.contactHead{
 
 button.deleteContact{
     position: absolute;
+    bottom: 0%;
 	display: block;
 	background: red;
 	width: 100%;
@@ -384,3 +382,9 @@ button.deleteContact{
 	color: white;
 }
 
+#searchBar{
+    width: 98%;
+    height: 20px;
+    text-align: center;
+    font-size: 18px;
+}
