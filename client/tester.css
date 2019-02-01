@@ -317,6 +317,8 @@ h5{
 
 .scrollbar{
     display: inline-block;
+    text-align: center;
+    color: white;
     background: yellowgreen;
     width: 20%;
     height: 100%;
