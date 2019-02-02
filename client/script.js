@@ -251,6 +251,19 @@ function search(){
 	}
 }
 
+/* autoLogin() - Called upon loading the page.
+  If the user has a login cookie stored login using credentials.
+*/
+function autoLogin(){
+	var username = getCookie("USERNAME");
+	var password = getCookie("PASSWORD");
+  if( !username || !password){
+		return;
+	} else {
+		doLogin(username, password);
+	}
+}
+
 function hideOrShow( elementId, showState ){
 	var vis = "visible";
 	var dis = "block";
