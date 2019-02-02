@@ -73,12 +73,20 @@ function signUpPrompt(){
 
 function addContactPrompt(){
 	pradBullshit("currentContact", false);
+	pradBullshit("UpdateFriends", false);
 	pradBullshit("NewFriends", true);
+}
+
+function updateContactPrompt(){
+	pradBullshit("currentContact", false);
+	pradBullshit("UpdateFriends", true);
+	pradBullshit("NewFriends", false);
 }
 
 function displayContact(index){
 	pradBullshit("currentContact", true);
 	pradBullshit("NewFriends", false);
+	pradBullshit("UpdateFriends", false);
 	$("#name").html(CONTACTS[index].fname + " " + CONTACTS[index].lname);
 	$("#email").html(CONTACTS[index].email);
 	$("#phone").html(CONTACTS[index].numbers);
