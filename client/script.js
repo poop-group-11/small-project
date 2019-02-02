@@ -156,7 +156,7 @@ function getContacts(){
 	        CONTACTS = res.data;
 	        var i =0;
 			contactsList = res.data.map((contact) => {
-				return '<li><div id="contact'+ i +'" class="contactHead" onClick=\"displayContact('+ i++ +')\">' + contact.fname  +  " " + contact.lname + '</div></li>';
+				return '<li><button id="contact'+ i +'" class="contactHead" onClick=\"displayContact('+ i++ +')\">' + contact.fname  +  " " + contact.lname + '</button></li>';
 			});
 			console.log(contactsList);
 			$("#contactList").html(function(){
