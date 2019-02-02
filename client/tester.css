@@ -374,7 +374,7 @@ button.contactHead{
 
 .addbutton{
 	display: inline-block;
-    position: absolute;
+	/*position: absolute;*/
     right: 8%;
 	font-size: 1vw;
     text-align: center;
@@ -388,6 +388,14 @@ button.contactHead{
     -webkit-transition-duration: 0.4s; /* Safari */
     transition-duration: 0.4s;
     cursor: pointer;
+}
+
+.addbutton:hover {background-color: silver}
+
+.addbutton:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
 }
 
 button.deleteContact{
