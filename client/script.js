@@ -119,6 +119,24 @@ function signUp(){
 	});
 }
 
+/* signOut() - Called upon signing out.
+  Purges all local data from cookies and html. Returns to login screen.
+*/
+function signOut(){
+  var contactList = document.getElementById("contactList");
+	var contacts = document.getElementsByClassName("contactHead");
+	var length = contacts.length;
+	var contact;
+	//Delete stored contacts.
+	for(var i = 0; i < length; i++){
+		contactList.removeChild(contacts[i]);
+	}
+	//Clear Cookies.
+	document.cookie = "USER=" + "";
+	document.cookie = "USERNAME=" + "";
+	document.cookie = "PASSWORD=" + "";
+}
+
 /* getContacts() - called upon login. *maybe other times not sure*
   Sends GET request for contacts. Displays contacts to contacts screen.
 */
