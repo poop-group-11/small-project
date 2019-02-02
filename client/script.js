@@ -135,7 +135,7 @@ function getContacts(){
 	        CONTACTS = res.data;
 	        var i =0;
 			contactsList = res.data.map((contact) => {
-				return '<li><div id="contact" onClick=\"displayContact('+ i++ +')\">' + contact.fname  +  " " + contact.lname + '</div></li>';
+				return '<li><div id="contact'+ i +'" class="contactHead" onClick=\"displayContact('+ i++ +')\">' + contact.fname  +  " " + contact.lname + '</div></li>';
 			});
 			console.log(contactsList);
 			$("#contactList").html(function(){
@@ -230,6 +230,25 @@ function deleteContact(){
 				console.log(error);
 		}
 	});
+}
+
+/* search() - Called upon typing in the search field.
+  Filters the contacts.
+*/
+function search(){
+	var search = document.getElementById("searchBar").value.toLowerCase();
+  var contacts = document.getElementsByClassName("contactHead");
+	var length = contacts.length;
+	var contactName;
+
+	for(i = 0; i < length; i++){
+		contactName = contacts[i].innerText.toLowerCase()
+		if(!contactName.include(search)){
+			hideOrShow(contacts[i].id, hide);
+		} else {
+			hideOrShow(contacts[i].id, show);
+		}
+	}
 }
 
 function hideOrShow( elementId, showState ){
