@@ -111,7 +111,9 @@ function signUp(){
 	    dataType: 'json',
 	    success: function (data) {
 	        console.log(data);
-	        doLogin(body.username, body.password);
+					if(data.success){
+						doLogin(body.username, body.password);
+					}
 	    },
 		error: function (error){
 			console.log("ERROR CREATING USER: ");
