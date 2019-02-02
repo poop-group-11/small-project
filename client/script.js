@@ -83,6 +83,7 @@ function displayContact(index){
 	$("#email").html(CONTACTS[index].email);
 	$("#phone").html(CONTACTS[index].numbers);
 	$("#address").html(CONTACTS[index].address);
+	currentIndex = index;
 }
 
 /* signUp() - Called upon account creation.
