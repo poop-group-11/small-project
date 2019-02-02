@@ -81,7 +81,7 @@ function displayContact(index){
 	pradBullshit("NewFriends", false);
 	$("#name").html(CONTACTS[index].fname + " " + CONTACTS[index].lname);
 	$("#email").html(CONTACTS[index].email);
-	$("#phone").html(CONTACTS[index].phone);
+	$("#phone").html(CONTACTS[index].numbers);
 	$("#address").html(CONTACTS[index].address);
 }
 
