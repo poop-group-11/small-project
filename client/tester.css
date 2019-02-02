@@ -237,7 +237,7 @@ h5{
 	font-size: 20px;
 }
 
-#createContactButton{
+#updateContactButton{
     position: absolute;
     bottom: 4.5%;
 	display: block;
