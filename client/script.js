@@ -33,7 +33,9 @@ function doLogin(username, password){
 			else{
 				console.log(data);
 				if(data.token)
-					document.cookie = data.token;
+					document.cookie = "USER=" + data.token;
+					document.cookie = "USERNAME=" + username;
+					document.cookie = "PASSWORD=" + password;
 				hideOrShow("Front Page", false);
 				hideOrShow("contactPage", true);
 				getContacts();
@@ -126,7 +128,7 @@ function getContacts(){
 	$.ajax({
 	    url: urlBase + 'api/getContacts',
 	    type: 'get',
-	    headers: { "Authorization": "Bearer " + document.cookie },
+	    headers: { "Authorization": "Bearer " + getCookie("USER") },
 	    dataType: 'json',
 	    success: function (res) {
 	        console.log(res);
@@ -171,7 +173,7 @@ function createContact(){
 		url: urlBase + 'api/createContact',
 	    type: 'post',
 	    data: JSON.stringify(body),
-	    headers: { "Content-Type": "application/json", "Authorization": "Bearer " + document.cookie },
+	    headers: { "Content-Type": "application/json", "Authorization": "Bearer " + getCookie("USER") },
 	    dataType: 'json',
 	    success: function (data) {
 	    	console.log(data);
@@ -201,6 +203,9 @@ function updateContact(){
   Sends a DELETE request. Removes contact display.
 */
 function deleteContact(){
+	if(!confirm("Are you sure you want to delete this contact?")){
+		return;
+	}
 	body = {
 		id: CONTACTS[currentIndex]._id
 	}
@@ -209,7 +214,7 @@ function deleteContact(){
 		url: urlBase + 'api/deleteContact',
 			type: 'delete',
 			data: JSON.stringify(body),
-			headers: { "Content-Type": "application/json", "Authorization": "Bearer " + document.cookie },
+			headers: { "Content-Type": "application/json", "Authorization": "Bearer " + getCookie("USER") },
 			dataType: 'json',
 			success: function (data) {
 				console.log(data);
@@ -238,4 +243,21 @@ function hideOrShow( elementId, showState ){
 
 	document.getElementById( elementId ).style.visibility = vis;
 	document.getElementById( elementId ).style.display = dis;
+}
+
+//helper function to get cookie
+function getCookie(cname) {
+  var name = cname + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(';');
+  for(var i = 0; i <ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
 }
