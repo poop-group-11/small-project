@@ -372,11 +372,37 @@ button.contactHead{
 	color: mintcream;
 }
 
-.addbutton{
+.logOutbutton{
 	display: inline-block;
-	/*position: absolute;*/
-    right: 8%;
+	position: absolute;
+    right: 2%;
 	font-size: 1vw;
+    text-align: center;
+    border:none;
+    color: white;
+    background-color: green;
+    opacity: 2;
+    height: 60%;
+    width: 20%;
+    font-family: 'Ubuntu', sans-serif;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.logOutbutton:hover {background-color: silver}
+
+.logOutbutton:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.addbutton{
+    display: inline-block;
+    position: absolute;
+    right: 24%;
+    font-size: 1vw;
     text-align: center;
     border:none;
     color: white;
