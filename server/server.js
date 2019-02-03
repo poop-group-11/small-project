@@ -6,9 +6,10 @@ const Data = require("./data");
 const User = require("./user_account");
 const Contact = require("./contact_info");
 require('dotenv').config();
-let middleware = require('./middleware');
-let cors = require('cors');
-let jwt = require('jsonwebtoken');
+const middleware = require('./middleware');
+const cors = require('cors');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 var ObjectId = mongoose.Types.ObjectId;
 
 const API_PORT = 3001;
@@ -45,7 +46,7 @@ app.use(bodyParser.json());
 app.use(logger("dev"));
 
 app.use(function(req, res, next) {
-    console.log("GOT A REQUeST");
+    console.log("GOT A REQUEST");
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, OPTIONS');
     res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
@@ -72,7 +73,8 @@ let loginHandler =  (req, res) => {
 
 
   if (username && password) {
-    User.find({username: username, pass: password}, (err, data) => {
+
+    User.find({username: username}, (err, data) => {
       if(err){
         return res.json({
           success: false,
@@ -82,23 +84,37 @@ let loginHandler =  (req, res) => {
       else if(data.length == 0){
         return res.json({
           success: false,
-          message: "incorrect username or password"
+          message: "user does not exist"
         });
       }
       else {
         // console.log(data);
-        console.log("ID: " + data[0]._id);
-        let token = jwt.sign(
-          {username: data[0].username, id: data[0]._id},
-          process.env.SECRET,
-          { expiresIn: '24h'} // expires in 24 hours
-        );
-        // return the JWT token for the future API calls
-        res.json({
-          success: true,
-          message: 'Authentication successful!',
-          token: token
+        bcrypt.compare(password, data[0].pass, function(error, res) {
+          if(res) {
+            // Passwords match
+            console.log("ID: " + data[0]._id);
+            let token = jwt.sign(
+              {username: data[0].username, id: data[0]._id},
+              process.env.SECRET,
+              { expiresIn: '24h'} // expires in 24 hours
+            );
+            // return the JWT token for the future API calls
+            res.json({
+              success: true,
+              message: 'Authentication successful!',
+              token: token
+            });
+
+          } else {
+           // Passwords don't match
+           return res.json({
+             success: false,
+             error: error,
+             message: "password provided was incorrect"
+           });
+          }
         });
+
       }
     });
   } else {
@@ -147,7 +163,18 @@ router.post("/createUser",  (req, res) => {
       // console.log("Saving User: " + username);
       //otherwise post data
       user.username = username;
-      user.pass = password;
+      bcrypt.hash(password, 10, function(err, hash) {
+        // Store hash in database
+        if(err){
+          console.log("error: " + error);
+          return res.json({
+            success: false,
+            error: err
+          });
+        }
+        user.pass = hash;
+      });
+
       user.save(err => {
         if (err) return res.json({ success: false, error: err });
         return res.json({ success:true });

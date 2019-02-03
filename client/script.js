@@ -44,7 +44,7 @@ function doLogin(username, password){
 		})
 		.fail(function(err) {
 			console.log(err);
-			alert("Could not login: \n" + err);
+			alert("Failed to login");
 		})
 }
 
