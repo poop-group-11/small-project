@@ -337,15 +337,15 @@ function search(){
 
 	for(i = 0; i < length; i++){
 		//Get contact info
-		contactFName = CONTACTS[i].fname;
-		contactLName = CONTACTS[i].lname;
-		contactPhone = CONTACTS[i].numbers;
-		contactEmail = CONTACTS[i].email;
-		contactAddress = CONTACTS[i].address
+		contactFName = CONTACTS[i].fname.toLowerCase();
+		contactLName = CONTACTS[i].lname.toLowerCase();
+		contactPhone = CONTACTS[i].numbers.toString().toLowerCase();
+		contactEmail = CONTACTS[i].email.toLowerCase();
+		contactAddress = CONTACTS[i].address.toLowerCase();
     //If it is in any field display.
 		if(contactFName.includes(search) ||
 	     contactLName.includes(search) ||
-		   contactPhone.toString().includes(search) ||
+		   contactPhone.includes(search) ||
 		   contactEmail.includes(search) ||
 		   contactAddress.includes(search)){
 			hideOrShow(contactHeads[i].id, true);
