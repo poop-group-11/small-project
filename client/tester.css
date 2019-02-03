@@ -65,7 +65,7 @@ h3
     text-align: left;
     font-family: "Lucida Console", Monaco, monospace;
     color: white;
-  	background-color: limegreen;
+  	background-color: #77BFA3;
     padding: .5% 2.5% .5%;
 }
 
@@ -80,7 +80,7 @@ h4{
     text-align: center;
     font-family: "Lucida Console", Monaco, monospace;
     color: white;
-    background-color: yellowgreen;
+    background-color: #83C4AB;
     opacity:90%;
     padding: .5% 0% .5%;
 }
@@ -138,9 +138,9 @@ h5{
 #pic{
     position: fixed;
     border-radius: 0%;
-    top:19%;
-    left: 20%;
-    width: 30%;
+    top:25%;
+    left: 3%;
+    width: 70%;
     opacity: 30%;
 }
 
@@ -159,7 +159,7 @@ h5{
     text-align: center;
     color: white ;
     position: absolute;
-    background: yellowgreen;
+    background: #A8D6C4;
     border-radius: 50px;
     opacity: .8;
     left: 68.55%;
@@ -298,7 +298,7 @@ h5{
     text-align: center;
     border:none;
     color: white;
-    background-color: green;
+    background-color: #77BFA3;
     opacity: 2;
     width: 95%;
     margin-left: 0%;
@@ -321,7 +321,7 @@ h5{
     text-align: center;
     border:none;
     color: white;
-    background-color: green;
+    background-color: #77BFA3;
     opacity:0.9;
     width: 95%;
     margin-left: 0%;
