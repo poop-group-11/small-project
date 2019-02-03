@@ -146,7 +146,7 @@ function signOut(){
 	document.cookie = "USERNAME=" + "";
 	document.cookie = "PASSWORD=" + "";
 	//Reload Page.
-	location.reload();s
+	location.reload();
 }
 
 /* getContacts() - called upon login. *maybe other times not sure*
@@ -190,6 +190,12 @@ function createContact(){
 	var phone = document.getElementById("newPhone").value;
 	var address = document.getElementById("newAddress").value;
 
+	//Phone Number error handling
+	if(phone.length() != 10){
+		alert("Phone Numbers must be 10 digits.");
+		return;
+	}
+
 	//Generate createContact json.
 	let body = {
 		fname : fname,
@@ -220,7 +226,15 @@ function createContact(){
 		}
 	});
 
+	document.getElementById("newFirstName").value = "";
+	document.getElementById("newLastName").value = "";
+	document.getElementById("newEmail").value = "";
+	document.getElementById("newPhone").value = "";
+	document.getElementById("newAddress").value = "";
 
+	pradBullshit("currentContact", true);
+	pradBullshit("UpdateFriends", true);
+	pradBullshit("NewFriends", true);
 }
 
 /* updateContact() - Called upon updating a contact.
@@ -282,9 +296,11 @@ function updateContact(){
 			console.log("ERROR UPDATING USER: ");
 				console.log(error);
 		}
-
 	});
 
+	pradBullshit("currentContact", true);
+	pradBullshit("UpdateFriends", true);
+	pradBullshit("NewFriends", true);
 }
 
 /* deleteContact() - Called upon deleting a contact.
