@@ -61,9 +61,9 @@ function pradBullshit(elementId, showState){
 	document.getElementById( elementId ).style.display = dis;
 }
 
-function doTester(){
-	hideOrShow("Front Page", false);
-	hideOrShow("contactPage", true);
+function returnHome(){
+	hideOrShow("logIn", true);
+	hideOrShow("register", false);
 }
 
 function signUpPrompt(){
