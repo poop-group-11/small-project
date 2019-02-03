@@ -334,16 +334,29 @@ function deleteContact(){
 */
 function search(){
 	var search = document.getElementById("searchBar").value.toLowerCase();
-  var contacts = document.getElementsByClassName("contactHead");
-	var length = contacts.length;
-	var contactName;
+	var length = CONTACTS.length;
+	var contactFName;
+	var contactLName;
+	var contactPhone;
+	var contactEmail;
+	var contactAddress;
 
-	for(i = 0; i < length; i++){
-		contactName = contacts[i].innerText.toLowerCase()
-		if(!contactName.include(search)){
-			hideOrShow(contacts[i].id, hide);
+	for(i = 1; i < length; i++){
+		//Get contact info
+		contactFName = CONTACTS[i].fname;
+		contactLName = CONTACTS[i].lname;
+		contactPhone = CONTACTS[i].numbers;
+		contactEmail = CONTACTS[i].email;
+		contactAddress = CONTACTS[i].address
+    //If it is in any field display.
+		if(contactFName.includes(search) ||
+	     contactLName.includes(search) ||
+		   contactPhone.includes(search) ||
+		   contactEmail.includes(search) ||
+		   contactAddress.includes(search)){
+			hideOrShow(contacts[i].id, true);
 		} else {
-			hideOrShow(contacts[i].id, show);
+			hideOrShow(contacts[i].id, false);
 		}
 	}
 }
