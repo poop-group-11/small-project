@@ -190,12 +190,6 @@ function createContact(){
 	var phone = document.getElementById("newPhone").value;
 	var address = document.getElementById("newAddress").value;
 
-	//Phone Number error handling
-	if(phone.length() != 10){
-		alert("Phone Numbers must be 10 digits.");
-		return;
-	}
-
 	//Generate createContact json.
 	let body = {
 		fname : fname,
