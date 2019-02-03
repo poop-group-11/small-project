@@ -335,13 +335,14 @@ function deleteContact(){
 function search(){
 	var search = document.getElementById("searchBar").value.toLowerCase();
 	var length = CONTACTS.length;
+	var contactHeads = document.getElementsByClassName("contactHead");
 	var contactFName;
 	var contactLName;
 	var contactPhone;
 	var contactEmail;
 	var contactAddress;
 
-	for(i = 1; i < length; i++){
+	for(i = 0; i < length; i++){
 		//Get contact info
 		contactFName = CONTACTS[i].fname;
 		contactLName = CONTACTS[i].lname;
@@ -351,12 +352,12 @@ function search(){
     //If it is in any field display.
 		if(contactFName.includes(search) ||
 	     contactLName.includes(search) ||
-		   contactPhone.includes(search) ||
+		   contactPhone.toString().includes(search) ||
 		   contactEmail.includes(search) ||
 		   contactAddress.includes(search)){
-			hideOrShow(contacts[i].id, true);
+			hideOrShow(contactHeads[i].id, true);
 		} else {
-			hideOrShow(contacts[i].id, false);
+			hideOrShow(contactHeads[i].id, false);
 		}
 	}
 }
