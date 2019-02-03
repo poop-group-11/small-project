@@ -254,7 +254,7 @@ function updateContact(){
 		update.email = email;
 	}
 	if (cphone != phone) {
-		update.phone = phone;
+		update.numbers = phone;
 	}
 	if (caddress != address) {
 		update.address = address;
@@ -266,6 +266,8 @@ function updateContact(){
 		id: CONTACTS[currentIndex]._id,
 		update: update
 	}
+
+  console.log(data);
 
 	$.ajax({
 		url: urlBase + 'api/updateContact',
