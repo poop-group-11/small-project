@@ -84,7 +84,7 @@ function updateContactPrompt(){
 	document.getElementById("freshFirstName").value = CONTACTS[currentIndex].fname;
   document.getElementById("freshLastName").value = CONTACTS[currentIndex].lname;
   document.getElementById("freshEmail").value = CONTACTS[currentIndex].email;
-  document.getElementById("freshPhone").value = CONTACTS[currentIndex].phone;
+  document.getElementById("freshPhone").value = CONTACTS[currentIndex].numbers.toString();
   document.getElementById("freshAddress").value = CONTACTS[currentIndex].address;
 }
 
