@@ -345,8 +345,8 @@ h5{
     background: yellowgreen;
     width: 20%;
     height: 100%;
-    border-right: outset;
-    border-color: olivedrab;
+	border-right: outset;
+	border-color: olivedrab;
 }
 
 .content{

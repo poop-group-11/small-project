@@ -61,9 +61,9 @@ function pradBullshit(elementId, showState){
 	document.getElementById( elementId ).style.display = dis;
 }
 
-function doTester(){
-	hideOrShow("Front Page", false);
-	hideOrShow("contactPage", true);
+function returnHome(){
+	hideOrShow("logIn", true);
+	hideOrShow("register", false);
 }
 
 function signUpPrompt(){
@@ -81,6 +81,11 @@ function updateContactPrompt(){
 	pradBullshit("currentContact", false);
 	pradBullshit("UpdateFriends", true);
 	pradBullshit("NewFriends", false);
+	document.getElementById("freshFirstName").value = CONTACTS[currentIndex].fname;
+  document.getElementById("freshLastName").value = CONTACTS[currentIndex].lname;
+  document.getElementById("freshEmail").value = CONTACTS[currentIndex].email;
+  document.getElementById("freshPhone").value = CONTACTS[currentIndex].phone;
+  document.getElementById("freshAddress").value = CONTACTS[currentIndex].address;
 }
 
 function displayContact(index){
@@ -220,18 +225,6 @@ function createContact(){
 
 }
 
-/* updatePrompt()
-  Called upon opening update contact. Autofills current info.
-*/
-function updatePrompt(){
-  document.getElementById("freshFirstName").value = CONTACTS[currentIndex].fname;
-  document.getElementById("freshLastName").value = CONTACTS[currentIndex].lname;
-  document.getElementById("freshEmail").value = CONTACTS[currentIndex].email;
-  document.getElementById("freshPhone").value = CONTACTS[currentIndex].phone;
-  document.getElementById("freshAddress").value = CONTACTS[currentIndex].address;
-
-}
-
 /* updateContact() - Called upon updating a contact.
   Sends a POST request containing update information. Displays updated info.
 */
@@ -264,7 +257,7 @@ function updateContact(){
 		update.phone = phone;
 	}
 	if (caddress != address) {
-		udpate.address = address;
+		update.address = address;
 	}
 
 	let body = {
@@ -344,15 +337,15 @@ function search(){
 
 	for(i = 0; i < length; i++){
 		//Get contact info
-		contactFName = CONTACTS[i].fname;
-		contactLName = CONTACTS[i].lname;
-		contactPhone = CONTACTS[i].numbers;
-		contactEmail = CONTACTS[i].email;
-		contactAddress = CONTACTS[i].address
+		contactFName = CONTACTS[i].fname.toLowerCase();
+		contactLName = CONTACTS[i].lname.toLowerCase();
+		contactPhone = CONTACTS[i].numbers.toString().toLowerCase();
+		contactEmail = CONTACTS[i].email.toLowerCase();
+		contactAddress = CONTACTS[i].address.toLowerCase();
     //If it is in any field display.
 		if(contactFName.includes(search) ||
 	     contactLName.includes(search) ||
-		   contactPhone.toString().includes(search) ||
+		   contactPhone.includes(search) ||
 		   contactEmail.includes(search) ||
 		   contactAddress.includes(search)){
 			hideOrShow(contactHeads[i].id, true);

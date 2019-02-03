@@ -223,7 +223,7 @@ router.delete("/deleteContact", middleware.checkToken, (req, res) => {
 //TODO: figure out how to use .find() for particular ID
 router.get("/getContacts", middleware.checkToken, (req, res) => {
 
-  Contact.find({ user_id: ObjectId(req.decoded.id)}).sort("lname").exec((err, data) => {
+  Contact.find({ user_id: ObjectId(req.decoded.id)}).sort('lname').exec((err, data) => {
     if (err) return res.json({ success: false, error: err });
     return res.json({ success: true, data: data });
   });
