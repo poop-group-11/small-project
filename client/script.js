@@ -126,6 +126,8 @@ function signUp(){
 	        console.log(data);
 					if(data.success){
 						doLogin(body.username, body.password);
+					}else{
+						alert("Username already exists");
 					}
 	    },
 		error: function (error){
@@ -139,16 +141,12 @@ function signUp(){
   Purges all local data from cookies and html. Returns to login screen.
 */
 function signOut(){
-  var contactList = document.getElementById("contactList");
-	var contacts = document.getElementsByClassName("contactHead");
-	var length = contacts.length;
-	var contact;
 	//Clear Cookies.
 	document.cookie = "USER=" + "";
 	document.cookie = "USERNAME=" + "";
 	document.cookie = "PASSWORD=" + "";
 	//Reload Page.
-	location.reload();s
+	location.reload();
 }
 
 /* getContacts() - called upon login. *maybe other times not sure*
@@ -222,7 +220,13 @@ function createContact(){
 		}
 	});
 
+	document.getElementById("newFirstName").value = "";
+	document.getElementById("newLastName").value = "";
+	document.getElementById("newEmail").value = "";
+	document.getElementById("newPhone").value = "";
+	document.getElementById("newAddress").value = "";
 
+	displayContact(currentIndex);
 }
 
 /* updateContact() - Called upon updating a contact.
@@ -275,18 +279,18 @@ function updateContact(){
 				console.log(data);
 					if(data.success === false){
 				alert("Could not Update Contact: \n" + data.error._message );
-			}
+				}
 			else{
 				getContacts();
-			}
+				}
 			},
 		error: function (error){
 			console.log("ERROR UPDATING USER: ");
 				console.log(error);
 		}
-
 	});
 
+	displayContact(currentIndex);
 }
 
 /* deleteContact() - Called upon deleting a contact.
