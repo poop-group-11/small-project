@@ -97,7 +97,7 @@ h5{
     color: white;
   	background-color: limegreen;
     padding: .5% 0% .5% 2.5%;
-    border-bottom: double;
+    border-bottom: solid;
     border-color: black;
 }
 
