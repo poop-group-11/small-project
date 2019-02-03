@@ -19,7 +19,6 @@
 		<input type="password" id="loginPassword" placeholder="Password"/><br />
 		<button type="button" id="loginButton" class="buttons" onclick="doLogin();"> Login </button>
 		<button type="button" id="signInButton" class="buttons2" onclick="signUpPrompt();"> New Users </button>
-		<button type="button" id="Tester" class="buttons" onclick="doTester();"> Tester </button>
 	</div>
 
 	<div id="register">
@@ -28,6 +27,7 @@
 		<input type="text" id="signinName" placeholder="Username" /><br />
 		<input type="password" id="signPassword" placeholder="Password"/><br />
 		<button type="button" id="signInButton" class="buttons" onclick="signUp();"> Sign Up </button>
+		<button type="button" id="returnHome" class="buttons" onclick="returnHome();"> Return </button>
 	</div>
 	<h4>&copy; Copyright</h4>
 </div>
@@ -40,8 +40,7 @@
 	<div id="info">
 		<div class="scrollbar">
 			<div id="head">Contact List</div>
-			<input type ="searchBar" id="searchBar" placeholder = "Search"/><br />
-			<button type="button" class ="buttons" onclick="search();">Search</button>
+			<input type ="searchBar" id="searchBar" placeholder = "Search" onkeyup="search();"/><br />
 			<div id="contactList">
 				<button type="button" class="contactHead" onclick ="displayContact();">Test</button>
 			</div>
