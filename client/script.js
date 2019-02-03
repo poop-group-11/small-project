@@ -81,6 +81,11 @@ function updateContactPrompt(){
 	pradBullshit("currentContact", false);
 	pradBullshit("UpdateFriends", true);
 	pradBullshit("NewFriends", false);
+	document.getElementById("freshFirstName").value = CONTACTS[currentIndex].fname;
+  document.getElementById("freshLastName").value = CONTACTS[currentIndex].lname;
+  document.getElementById("freshEmail").value = CONTACTS[currentIndex].email;
+  document.getElementById("freshPhone").value = CONTACTS[currentIndex].phone;
+  document.getElementById("freshAddress").value = CONTACTS[currentIndex].address;
 }
 
 function displayContact(index){
@@ -220,18 +225,6 @@ function createContact(){
 
 }
 
-/* updatePrompt()
-  Called upon opening update contact. Autofills current info.
-*/
-function updatePrompt(){
-  document.getElementById("freshFirstName").value = CONTACTS[currentIndex].fname;
-  document.getElementById("freshLastName").value = CONTACTS[currentIndex].lname;
-  document.getElementById("freshEmail").value = CONTACTS[currentIndex].email;
-  document.getElementById("freshPhone").value = CONTACTS[currentIndex].phone;
-  document.getElementById("freshAddress").value = CONTACTS[currentIndex].address;
-
-}
-
 /* updateContact() - Called upon updating a contact.
   Sends a POST request containing update information. Displays updated info.
 */
@@ -264,7 +257,7 @@ function updateContact(){
 		update.phone = phone;
 	}
 	if (caddress != address) {
-		udpate.address = address;
+		update.address = address;
 	}
 
 	let body = {
