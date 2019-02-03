@@ -226,9 +226,7 @@ function createContact(){
 	document.getElementById("newPhone").value = "";
 	document.getElementById("newAddress").value = "";
 
-	pradBullshit("currentContact", true);
-	pradBullshit("UpdateFriends", true);
-	pradBullshit("NewFriends", true);
+	displayContact(currentIndex);
 }
 
 /* updateContact() - Called upon updating a contact.
@@ -292,9 +290,7 @@ function updateContact(){
 		}
 	});
 
-	pradBullshit("currentContact", true);
-	pradBullshit("UpdateFriends", true);
-	pradBullshit("NewFriends", true);
+	displayContact(currentIndex);
 }
 
 /* deleteContact() - Called upon deleting a contact.
