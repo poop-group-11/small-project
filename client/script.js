@@ -138,14 +138,12 @@ function signOut(){
 	var contacts = document.getElementsByClassName("contactHead");
 	var length = contacts.length;
 	var contact;
-	//Delete stored contacts.
-	for(var i = 0; i < length; i++){
-		contactList.removeChild(contacts[i]);
-	}
 	//Clear Cookies.
 	document.cookie = "USER=" + "";
 	document.cookie = "USERNAME=" + "";
 	document.cookie = "PASSWORD=" + "";
+	//Reload Page.
+	location.reload();s
 }
 
 /* getContacts() - called upon login. *maybe other times not sure*
