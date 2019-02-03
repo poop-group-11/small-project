@@ -258,14 +258,10 @@ function updateContact(){
 		update.address = address;
 	}
 
-	console.log(update);
-
 	let body = {
 		id: CONTACTS[currentIndex]._id,
 		update: update
 	}
-
-  console.log(data);
 
 	$.ajax({
 		url: urlBase + 'api/updateContact',
