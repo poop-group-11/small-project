@@ -97,6 +97,8 @@ h5{
     color: white;
   	background-color: limegreen;
     padding: .5% 0% .5% 2.5%;
+    border-bottom: outset;
+    border-color: olivedrab;
 }
 
 #loginName{
@@ -260,9 +262,9 @@ h5{
 
 #info{
     position: fixed;
-    top:5%;
+    top:5.5%;
     width: 100%;
-	height: 95%;
+	height: 94.5%;
 }
 
 #contactHeader{
@@ -343,6 +345,8 @@ h5{
     background: yellowgreen;
     width: 20%;
     height: 100%;
+    border-right: outset;
+    border-color: olivedrab;
 }
 
 .content{
@@ -374,7 +378,7 @@ button.contactHead{
 	font-size: 3vh;
 	color: mintcream;
     border-color: white;
-    background-color: yellowgreen;
+    background-color: olivedrab;
 }
 
 .logOutbutton{
@@ -438,4 +442,16 @@ button.deleteContact{
 	height: 4%;
 	font-size: 20px;
 	color: white;
+}
+
+button.updateContact{
+    z-index: 500;
+    position: absolute;
+    bottom: 5%;
+    display: block;
+    background: red;
+    width: 100%;
+    height: 4%;
+    font-size: 20px;
+    color: white;
 }
