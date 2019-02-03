@@ -126,6 +126,8 @@ function signUp(){
 	        console.log(data);
 					if(data.success){
 						doLogin(body.username, body.password);
+					}else{
+						alert("Username already exists");
 					}
 	    },
 		error: function (error){
@@ -139,10 +141,6 @@ function signUp(){
   Purges all local data from cookies and html. Returns to login screen.
 */
 function signOut(){
-  var contactList = document.getElementById("contactList");
-	var contacts = document.getElementsByClassName("contactHead");
-	var length = contacts.length;
-	var contact;
 	//Clear Cookies.
 	document.cookie = "USER=" + "";
 	document.cookie = "USERNAME=" + "";
