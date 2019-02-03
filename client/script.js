@@ -222,10 +222,80 @@ function createContact(){
 
 }
 
+/* updatePrompt()
+  Called upon opening update contact. Autofills current info.
+*/
+function updatePrompt(){
+  document.getElementById("freshFirstName").value = CONTACTS[currentIndex].fname;
+  document.getElementById("freshLastName").value = CONTACTS[currentIndex].lname;
+  document.getElementById("freshEmail").value = CONTACTS[currentIndex].email;
+  document.getElementById("freshPhone").value = CONTACTS[currentIndex].phone;
+  document.getElementById("freshAddress").value = CONTACTS[currentIndex].address;
+
+}
+
 /* updateContact() - Called upon updating a contact.
   Sends a POST request containing update information. Displays updated info.
 */
 function updateContact(){
+
+	var cfname = CONTACTS[currentIndex].fname;
+	var clname = CONTACTS[currentIndex].lname;
+	var cemail = CONTACTS[currentIndex].email;
+	var cphone = CONTACTS[currentIndex].phone;
+	var caddress = CONTACTS[currentIndex].address;
+
+	var fname = document.getElementById("freshFirstName").value;
+	var lname = document.getElementById("freshLastName").value;
+	var email = document.getElementById("freshEmail").value;
+	var phone = document.getElementById("freshPhone").value;
+	var address = document.getElementById("freshAddress").value;
+
+
+	let update = {}
+	if (cfname != fname) {
+		update.fname = fname;
+	}
+	if (clname != lname) {
+		update.lname = lname;
+	}
+	if (cemail != email) {
+		update.email = email;
+	}
+	if (cphone != phone) {
+		update.phone = phone;
+	}
+	if (caddress != address) {
+		udpate.address = address;
+	}
+
+	let body = {
+		id: CONTACTS[currentIndex]._id,
+		update: update
+	}
+
+	$.ajax({
+		url: urlBase + 'api/updateContact',
+			type: 'post',
+			data: JSON.stringify(body),
+			headers: { "Content-Type": "application/json", "Authorization": "Bearer " + getCookie("USER") },
+			dataType: 'json',
+			success: function (data) {
+				console.log(data);
+					if(data.success === false){
+				alert("Could not Update Contact: \n" + data.error._message );
+			}
+			else{
+				getContacts();
+			}
+			},
+		error: function (error){
+			console.log("ERROR UPDATING USER: ");
+				console.log(error);
+		}
+
+	});
+
 }
 
 /* deleteContact() - Called upon deleting a contact.
