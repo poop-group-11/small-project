@@ -275,10 +275,10 @@ h5{
 }
 
 #contactList{
-	display: inline-block;
+	display: block;
 	overflow-y: auto;
 	width: 100%;
-	height: 100%;
+	height: 85.5%;
 	margin-top: 10px;
 }
 
