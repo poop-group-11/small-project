@@ -220,10 +220,80 @@ function createContact(){
 
 }
 
+/* updatePrompt()
+  Called upon opening update contact. Autofills current info.
+*/
+function updatePrompt(){
+  document.getElementById("freshFirstName").value = CONTACTS[currentIndex].fname;
+  document.getElementById("freshLastName").value = CONTACTS[currentIndex].lname;
+  document.getElementById("freshEmail").value = CONTACTS[currentIndex].email;
+  document.getElementById("freshPhone").value = CONTACTS[currentIndex].phone;
+  document.getElementById("freshAddress").value = CONTACTS[currentIndex].address;
+
+}
+
 /* updateContact() - Called upon updating a contact.
   Sends a POST request containing update information. Displays updated info.
 */
 function updateContact(){
+
+	var cfname = CONTACTS[currentIndex].fname;
+	var clname = CONTACTS[currentIndex].lname;
+	var cemail = CONTACTS[currentIndex].email;
+	var cphone = CONTACTS[currentIndex].phone;
+	var caddress = CONTACTS[currentIndex].address;
+
+	var fname = document.getElementById("freshFirstName").value;
+	var lname = document.getElementById("freshLastName").value;
+	var email = document.getElementById("freshEmail").value;
+	var phone = document.getElementById("freshPhone").value;
+	var address = document.getElementById("freshAddress").value;
+
+
+	let update = {}
+	if (cfname != fname) {
+		update.fname = fname;
+	}
+	if (clname != lname) {
+		update.lname = lname;
+	}
+	if (cemail != email) {
+		update.email = email;
+	}
+	if (cphone != phone) {
+		update.phone = phone;
+	}
+	if (caddress != address) {
+		udpate.address = address;
+	}
+
+	let body = {
+		id: CONTACTS[currentIndex]._id,
+		update: update
+	}
+
+	$.ajax({
+		url: urlBase + 'api/updateContact',
+			type: 'post',
+			data: JSON.stringify(body),
+			headers: { "Content-Type": "application/json", "Authorization": "Bearer " + getCookie("USER") },
+			dataType: 'json',
+			success: function (data) {
+				console.log(data);
+					if(data.success === false){
+				alert("Could not Update Contact: \n" + data.error._message );
+			}
+			else{
+				getContacts();
+			}
+			},
+		error: function (error){
+			console.log("ERROR UPDATING USER: ");
+				console.log(error);
+		}
+
+	});
+
 }
 
 /* deleteContact() - Called upon deleting a contact.
@@ -264,16 +334,29 @@ function deleteContact(){
 */
 function search(){
 	var search = document.getElementById("searchBar").value.toLowerCase();
-  var contacts = document.getElementsByClassName("contactHead");
-	var length = contacts.length;
-	var contactName;
+	var length = CONTACTS.length;
+	var contactFName;
+	var contactLName;
+	var contactPhone;
+	var contactEmail;
+	var contactAddress;
 
-	for(i = 0; i < length; i++){
-		contactName = contacts[i].innerText.toLowerCase()
-		if(!contactName.include(search)){
-			hideOrShow(contacts[i].id, hide);
+	for(i = 1; i < length; i++){
+		//Get contact info
+		contactFName = CONTACTS[i].fname;
+		contactLName = CONTACTS[i].lname;
+		contactPhone = CONTACTS[i].numbers;
+		contactEmail = CONTACTS[i].email;
+		contactAddress = CONTACTS[i].address
+    //If it is in any field display.
+		if(contactFName.includes(search) ||
+	     contactLName.includes(search) ||
+		   contactPhone.includes(search) ||
+		   contactEmail.includes(search) ||
+		   contactAddress.includes(search)){
+			hideOrShow(contacts[i].id, true);
 		} else {
-			hideOrShow(contacts[i].id, show);
+			hideOrShow(contacts[i].id, false);
 		}
 	}
 }
