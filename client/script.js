@@ -273,10 +273,10 @@ function updateContact(){
 				console.log(data);
 					if(data.success === false){
 				alert("Could not Update Contact: \n" + data.error._message );
-			}
+				}
 			else{
 				getContacts();
-			}
+				}
 			},
 		error: function (error){
 			console.log("ERROR UPDATING USER: ");
