@@ -3,7 +3,7 @@ const urlBase = "https://poopgroup11.xyz/"; //For use on the production server (
 var extension;
 var USERNAME;
 var CONTACTS;
-var currentIndex = -1;
+var currentIndex;
 
 /* doLogin() : Called either on registration or login.
   Sends username and password to server with POST request.
@@ -48,7 +48,7 @@ function doLogin(username, password){
 		})
 }
 
-function pradBullshit(elementId, showState){
+function hideOrShowInline(elementId, showState){
 	var vis = "visible";
 	var dis = "inline-block";
 	if( !showState )
@@ -72,9 +72,9 @@ function signUpPrompt(){
 }
 
 function addContactPrompt(){
-	pradBullshit("currentContact", false);
-	pradBullshit("UpdateFriends", false);
-	pradBullshit("NewFriends", true);
+	hideOrShowInline("currentContact", false);
+	hideOrShowInline("UpdateFriends", false);
+	hideOrShowInline("NewFriends", true);
 	document.getElementById("newFirstName").value = "";
 	document.getElementById("newLastName").value = "";
 	document.getElementById("newEmail").value = "";
@@ -83,9 +83,9 @@ function addContactPrompt(){
 }
 
 function updateContactPrompt(){
-	pradBullshit("currentContact", false);
-	pradBullshit("UpdateFriends", true);
-	pradBullshit("NewFriends", false);
+	hideOrShowInline("currentContact", false);
+	hideOrShowInline("UpdateFriends", true);
+	hideOrShowInline("NewFriends", false);
 	document.getElementById("freshFirstName").value = CONTACTS[currentIndex].fname;
   document.getElementById("freshLastName").value = CONTACTS[currentIndex].lname;
   document.getElementById("freshEmail").value = CONTACTS[currentIndex].email;
@@ -94,9 +94,9 @@ function updateContactPrompt(){
 }
 
 function displayContact(index){
-	pradBullshit("currentContact", true);
-	pradBullshit("NewFriends", false);
-	pradBullshit("UpdateFriends", false);
+	hideOrShowInline("currentContact", true);
+	hideOrShowInline("NewFriends", false);
+	hideOrShowInline("UpdateFriends", false);
 	$("#name").html(CONTACTS[index].fname + " " + CONTACTS[index].lname);
 	$("#email").html(CONTACTS[index].email);
 	$("#phone").html(CONTACTS[index].numbers);
@@ -202,8 +202,6 @@ function createContact(){
 	  return;
 	}
 
-	currentIndex = -1; //Makes us return to blank screen.
-
 	//Generate createContact json.
 	let body = {
 		fname : fname,
@@ -225,6 +223,7 @@ function createContact(){
 				alert("Could not Create Contact: \n" + data.error._message );
 			}
 			else{
+				currentIndex = -1;
 				getContacts();
 			}
 	    },
@@ -240,9 +239,9 @@ function createContact(){
 */
 function back(){
 	if(CONTACTS.length == 0 || currentIndex == -1){
-		pradBullshit("currentContact", false);
-		pradBullshit("NewFriends", false);
-		pradBullshit("UpdateFriends", false);
+		hideOrShowInline("currentContact", false);
+		hideOrShowInline("NewFriends", false);
+		hideOrShowInline("UpdateFriends", false);
 	} else {
 	  displayContact(currentIndex);
 	}
@@ -325,9 +324,6 @@ function deleteContact(){
 		id: CONTACTS[currentIndex]._id
 	}
 
-  pradBullshit("currentContact", false);
-	currentIndex = -1;
-
 	$.ajax({
 		url: urlBase + 'api/deleteContact',
 			type: 'delete',
@@ -340,6 +336,7 @@ function deleteContact(){
 				alert("Could not Delete Contact: \n" + data.error._message );
 			}
 			else{
+				currentIndex = -1;
 				getContacts();
 			}
 			},
