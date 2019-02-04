@@ -238,7 +238,11 @@ function createContact(){
   Backs out of whatever screen we are in.
 */
 function back(){
-  displayContact(currentIndex);
+	if(CONTACTS.length == 0){
+		pradBullshit("currentContact", false);
+	} else {
+	  displayContact(currentIndex);
+	}
 }
 
 /* updateContact() - Called upon updating a contact.
@@ -319,6 +323,8 @@ function deleteContact(){
 		id: CONTACTS[currentIndex]._id
 	}
 
+  pradBullshit("currentContact", false);
+
 	$.ajax({
 		url: urlBase + 'api/deleteContact',
 			type: 'delete',
@@ -333,7 +339,6 @@ function deleteContact(){
 			else{
 				getContacts();
 				search();
-				pradBullshit("currentContact", false);
 			}
 			},
 		error: function (error){
@@ -362,8 +367,7 @@ function search(){
 		contactEmail = CONTACTS[i].email.toLowerCase();
 		contactAddress = CONTACTS[i].address.toLowerCase();
     //If it is in any field display.
-		if(contactFName.includes(search) ||
-	     contactLName.includes(search) ||
+		if(contactName.includes(search)  ||
 		   contactPhone.includes(search) ||
 		   contactEmail.includes(search) ||
 		   contactAddress.includes(search)){
