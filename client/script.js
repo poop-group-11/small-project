@@ -3,7 +3,7 @@ const urlBase = "https://poopgroup11.xyz/"; //For use on the production server (
 var extension;
 var USERNAME;
 var CONTACTS;
-var currentIndex;
+var currentIndex = -1;
 
 /* doLogin() : Called either on registration or login.
   Sends username and password to server with POST request.
