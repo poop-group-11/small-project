@@ -174,14 +174,16 @@ router.post("/createUser",  (req, res) => {
           });
         }else{
           user.pass = hash;
+          user.save(err => {
+            if (err) return res.json({ success: false, message: "error saving user to database", error: err });
+            return res.json({ success:true });
+          });
         }
 
+
       });
 
-      user.save(err => {
-        if (err) return res.json({ success: false, message: "error saving user to database", error: err });
-        return res.json({ success:true });
-      });
+
     }else{
       // console.log(data);
       return res.json({
