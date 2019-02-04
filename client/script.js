@@ -75,6 +75,11 @@ function addContactPrompt(){
 	pradBullshit("currentContact", false);
 	pradBullshit("UpdateFriends", false);
 	pradBullshit("NewFriends", true);
+	document.getElementById("newFirstName").value = "";
+	document.getElementById("newLastName").value = "";
+	document.getElementById("newEmail").value = "";
+	document.getElementById("newPhone").value = "";
+	document.getElementById("newAddress").value = "";
 }
 
 function updateContactPrompt(){
@@ -226,12 +231,6 @@ function createContact(){
     		console.log(error);
 		}
 	});
-
-	document.getElementById("newFirstName").value = "";
-	document.getElementById("newLastName").value = "";
-	document.getElementById("newEmail").value = "";
-	document.getElementById("newPhone").value = "";
-	document.getElementById("newAddress").value = "";
 }
 
 /* back()
