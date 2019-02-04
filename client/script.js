@@ -14,7 +14,7 @@ function doLogin(username, password){
 
 	if(!username || !password)
 	{
-		username = document.getElementById("loginName").value; //Assign from user field.
+		username = document.getElementById("loginName").value.toLowerCase(); //Assign from user field.
 		password = document.getElementById("loginPassword").value; //Assign from pass field.
 	}
 
@@ -107,8 +107,8 @@ function signUp(){
 	hideOrShow("register", false);
 	hideOrShow("logIn", true);
 
-	var username = document.getElementById("signinName").value; //WARNING id may change in future updates to html.
-	var password = document.getElementById("signPassword").value; //WARNING id may change in future updates to html.
+	var username = document.getElementById("signinName").value.toLowerCase();
+	var password = document.getElementById("signPassword").value;
 
 	//Create JSON Body.
 	let body = {
@@ -190,6 +190,11 @@ function createContact(){
 	var phone = document.getElementById("newPhone").value;
 	var address = document.getElementById("newAddress").value;
 
+	if(!/^\d+$/.test(phone)){ //Regular Expression checking if only digits
+    alert("Phone must only contain digits.");
+	  return;
+	}
+
 	//Generate createContact json.
 	let body = {
 		fname : fname,
@@ -212,6 +217,8 @@ function createContact(){
 			}
 			else{
 				getContacts();
+				displayContact(currentIndex);
+				search();
 			}
 	    },
 		error: function (error){
@@ -225,8 +232,13 @@ function createContact(){
 	document.getElementById("newEmail").value = "";
 	document.getElementById("newPhone").value = "";
 	document.getElementById("newAddress").value = "";
+}
 
-	displayContact(currentIndex);
+/* back()
+  Backs out of whatever screen we are in.
+*/
+function back(){
+  displayContact(currentIndex);
 }
 
 /* updateContact() - Called upon updating a contact.
@@ -246,6 +258,10 @@ function updateContact(){
 	var phone = document.getElementById("freshPhone").value;
 	var address = document.getElementById("freshAddress").value;
 
+	if(!/^\d+$/.test(phone)){ //Regular Expression checking if only digits
+    alert("Phone must only contain digits.");
+	  return;
+	}
 
 	let update = {}
 	if (cfname != fname) {
@@ -282,6 +298,7 @@ function updateContact(){
 				}
 			else{
 				getContacts();
+				displayContact(currentIndex);
 				}
 			},
 		error: function (error){
@@ -289,8 +306,6 @@ function updateContact(){
 				console.log(error);
 		}
 	});
-
-	displayContact(currentIndex);
 }
 
 /* deleteContact() - Called upon deleting a contact.
@@ -317,6 +332,8 @@ function deleteContact(){
 			}
 			else{
 				getContacts();
+				search();
+				pradBullshit("currentContact", false);
 			}
 			},
 		error: function (error){
@@ -333,16 +350,14 @@ function search(){
 	var search = document.getElementById("searchBar").value.toLowerCase();
 	var length = CONTACTS.length;
 	var contactHeads = document.getElementsByClassName("contactHead");
-	var contactFName;
-	var contactLName;
+	var contactName;
 	var contactPhone;
 	var contactEmail;
 	var contactAddress;
 
 	for(i = 0; i < length; i++){
 		//Get contact info
-		contactFName = CONTACTS[i].fname.toLowerCase();
-		contactLName = CONTACTS[i].lname.toLowerCase();
+		contactName = CONTACTS[i].fname.toLowerCase() + " " + CONTACTS[i].lname.toLowerCase();
 		contactPhone = CONTACTS[i].numbers.toString().toLowerCase();
 		contactEmail = CONTACTS[i].email.toLowerCase();
 		contactAddress = CONTACTS[i].address.toLowerCase();
