@@ -368,7 +368,7 @@ h5{
     left: 20.4%;
 	position: fixed;
     height: 98%;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 button.contactHead{
@@ -466,4 +466,11 @@ button.back{
     height: 4%;
     font-size: 20px;
     color: white;
+}
+
+.textField{
+	font-size: 20px;
+    text-align: center;
+    width: 98%;
+    padding: 0% 0% 0%;
 }
