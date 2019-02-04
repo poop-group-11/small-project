@@ -9,7 +9,7 @@ require('dotenv').config();
 const middleware = require('./middleware');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 var ObjectId = mongoose.Types.ObjectId;
 
 const API_PORT = 3001;
