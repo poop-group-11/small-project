@@ -169,14 +169,17 @@ router.post("/createUser",  (req, res) => {
           console.log("error: " + error);
           return res.json({
             success: false,
+            message: "error hashing password",
             error: err
           });
+        }else{
+          user.pass = hash;
         }
-        user.pass = hash;
+
       });
 
       user.save(err => {
-        if (err) return res.json({ success: false, error: err });
+        if (err) return res.json({ success: false, message: "error saving user to database", error: err });
         return res.json({ success:true });
       });
     }else{
