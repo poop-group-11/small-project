@@ -88,32 +88,30 @@ let loginHandler =  (req, res) => {
         });
       }
       else {
+        //user exists
         // console.log(data);
-        bcrypt.compare(password, data[0].pass, function(error, res) {
-          if(res) {
-            // Passwords match
-            console.log("ID: " + data[0]._id);
-            let token = jwt.sign(
-              {username: data[0].username, id: data[0]._id},
-              process.env.SECRET,
-              { expiresIn: '24h'} // expires in 24 hours
-            );
-            // return the JWT token for the future API calls
-            res.json({
-              success: true,
-              message: 'Authentication successful!',
-              token: token
-            });
-
-          } else {
-           // Passwords don't match
-           return res.json({
-             success: false,
-             error: error,
-             message: "password provided was incorrect"
-           });
-          }
-        });
+        if(bcrypt.compareSync(password, data[0].pass)){
+          //paswords match
+          console.log("ID: " + data[0]._id);
+          let token = jwt.sign(
+            {username: data[0].username, id: data[0]._id},
+            process.env.SECRET,
+            { expiresIn: '24h'} // expires in 24 hours
+          );
+          // return the JWT token for the future API calls
+          res.json({
+            success: true,
+            message: 'Authentication successful!',
+            token: token
+          });
+        }else{
+          //passwords don't match
+          return res.json({
+            success: false,
+            error: error,
+            message: "password provided was incorrect"
+          });
+        }
 
       }
     });
@@ -163,25 +161,23 @@ router.post("/createUser",  (req, res) => {
       // console.log("Saving User: " + username);
       //otherwise post data
       user.username = username;
-      bcrypt.hash(password, 10, function(err, hash) {
-        // Store hash in database
-        if(err){
-          console.log("error: " + error);
-          return res.json({
-            success: false,
-            message: "error hashing password",
-            error: err
-          });
-        }else{
-          user.pass = hash;
-          user.save(err => {
-            if (err) return res.json({ success: false, message: "error saving user to database", error: err });
-            return res.json({ success:true });
-          });
-        }
-
-
+      var hash;
+      try{
+        hash = bcrypt.hashSync(password, 10);
+      }catch(err){
+        console.log("error hashing password");
+        return res.json({
+          success: false,
+          message: "error hashing password",
+          error: err
+        });
+      }
+      user.pass = hash;
+      user.save(err => {
+        if (err) return res.json({ success: false, message: "error saving user to database", error: err });
+        return res.json({ success:true });
       });
+
 
 
     }else{
