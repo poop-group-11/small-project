@@ -222,7 +222,16 @@ function createContact(){
 			}
 			else{
 				getContacts();
-				displayContact(currentIndex);
+				for(var i = 0; i < CONTACTS.length; i++){
+					if(CONTACTS[i].fname == fname &&
+						 CONTACTS[i].lname == lname &&
+						 CONTACTS[i].email == email &&
+						 CONTACTS[i].numbers.toString() == phone &&
+						 CONTACTS[i].address == address){
+					  displayContact(i);
+						break;
+					}
+				}
 				search();
 			}
 	    },
@@ -239,6 +248,8 @@ function createContact(){
 function back(){
 	if(CONTACTS.length == 0){
 		pradBullshit("currentContact", false);
+		pradBullshit("NewFriends", false);
+		pradBullshit("UpdateFriends", false);
 	} else {
 	  displayContact(currentIndex);
 	}
