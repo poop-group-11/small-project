@@ -3,7 +3,7 @@ const urlBase = "https://poopgroup11.xyz/"; //For use on the production server (
 var extension;
 var USERNAME;
 var CONTACTS;
-var currentIndex;
+var currentIndex = -1;
 
 /* doLogin() : Called either on registration or login.
   Sends username and password to server with POST request.
@@ -176,6 +176,8 @@ function getContacts(){
 			$("#contactList").html(function(){
 				return "<ul>" + contactsList.join("") + "</ul>";
 			});
+			back(); //Display current contact once updated info is recieved.
+			search(); //Research once update info is recieved.
 	    },
 		error: function (error){
 			console.log("ERROR GETTING CONTACTS: ");
@@ -200,6 +202,8 @@ function createContact(){
 	  return;
 	}
 
+	currentIndex = -1; //Makes us return to blank screen.
+
 	//Generate createContact json.
 	let body = {
 		fname : fname,
@@ -222,17 +226,6 @@ function createContact(){
 			}
 			else{
 				getContacts();
-				for(var i = 0; i < CONTACTS.length; i++){
-					if(CONTACTS[i].fname == fname &&
-						 CONTACTS[i].lname == lname &&
-						 CONTACTS[i].email == email &&
-						 CONTACTS[i].numbers.toString() == phone &&
-						 CONTACTS[i].address == address){
-					  displayContact(i);
-						break;
-					}
-				}
-				search();
 			}
 	    },
 		error: function (error){
@@ -246,7 +239,7 @@ function createContact(){
   Backs out of whatever screen we are in.
 */
 function back(){
-	if(CONTACTS.length == 0){
+	if(CONTACTS.length == 0 || currentIndex == -1){
 		pradBullshit("currentContact", false);
 		pradBullshit("NewFriends", false);
 		pradBullshit("UpdateFriends", false);
@@ -312,7 +305,6 @@ function updateContact(){
 				}
 			else{
 				getContacts();
-				displayContact(currentIndex);
 				}
 			},
 		error: function (error){
@@ -334,6 +326,7 @@ function deleteContact(){
 	}
 
   pradBullshit("currentContact", false);
+	currentIndex = -1;
 
 	$.ajax({
 		url: urlBase + 'api/deleteContact',
@@ -348,7 +341,6 @@ function deleteContact(){
 			}
 			else{
 				getContacts();
-				search();
 			}
 			},
 		error: function (error){
